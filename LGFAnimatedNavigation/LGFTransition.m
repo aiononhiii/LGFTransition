@@ -76,6 +76,10 @@
         [containerView addSubview:toView];
         [containerView addSubview:fromView];
         [toView addSubview:mask];
+        toView.frame = CGRectMake(-(lgf_ScreenWidth / 2),
+                                  0.0,
+                                  lgf_ScreenWidth,
+                                  lgf_ScreenHeight);
     }
 
     // 执行转场动画 改变UI

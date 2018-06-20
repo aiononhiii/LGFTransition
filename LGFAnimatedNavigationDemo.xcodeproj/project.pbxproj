@@ -158,11 +158,11 @@
 			isa = PBXGroup;
 			children = (
 				18297A2820DA3DD6005DB4B7 /* LGFTransition.h */,
-				18297A2920DA3DD6005DB4B7 /* UINavigationController+LGFAnimatedTransition.m */,
-				18297A2A20DA3DD6005DB4B7 /* LGFNavigationBackButton.m */,
 				18297A2B20DA3DD6005DB4B7 /* LGFTransition.m */,
 				18297A2C20DA3DD6005DB4B7 /* UINavigationController+LGFAnimatedTransition.h */,
+				18297A2920DA3DD6005DB4B7 /* UINavigationController+LGFAnimatedTransition.m */,
 				18297A2D20DA3DD6005DB4B7 /* LGFNavigationBackButton.h */,
+				18297A2A20DA3DD6005DB4B7 /* LGFNavigationBackButton.m */,
 			);
 			path = LGFAnimatedNavigation;
 			sourceTree = "<group>";
