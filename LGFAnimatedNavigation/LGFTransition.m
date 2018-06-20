@@ -17,8 +17,10 @@
 
 @interface LGFTransition()
 // Push 过去的 ViewController
+// Push ViewController
 @property(strong,nonatomic) UIViewController *toVC;
-// 自定义动画的时间
+// 自定义动画的时长
+// Custom animation Duration
 @property (nonatomic, assign) NSTimeInterval transitionDuration;
 @end
 
@@ -35,7 +37,7 @@
 
 - (void)setLgf_TransitionDuration:(NSTimeInterval)lgf_TransitionDuration {
     _lgf_TransitionDuration = lgf_TransitionDuration;
-    _transitionDuration = _lgf_TransitionDuration;
+    _transitionDuration = lgf_TransitionDuration;
 }
 
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext {
@@ -43,25 +45,29 @@
 }
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext {
-    //转场过渡的容器view  -- UINavigationTransitionView
+    // 转场过渡的容器
+    // Transition container
     UIView *containerView = [transitionContext containerView];
 
     // Push 前的 ViewController
+    // Push from ViewController
     UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     UIView *fromView = fromVC.view;
+    
     // Push 后的 ViewController
+    // Push to ViewController
     UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIView *toView = toVC.view;
 
     // 初始化 半透明黑色遮罩
+    // Initialization Translucent black mask
     UIView *mask = [[UIView alloc] init];
     mask.backgroundColor = [UIColor blackColor];
     mask.frame = [[UIScreen mainScreen] bounds];
 
-    //此处判断是push，还是pop 操作
+    // 判断是 push 还是 pop 操作
+    // Determine if it is a push or pop operation
     BOOL isPush = ([toVC.navigationController.viewControllers indexOfObject:toVC] > [fromVC.navigationController.viewControllers indexOfObject:fromVC]);
-
-    // 判断是 Push 还是 Pop
     if (isPush) {
         mask.alpha = 0.0;
         [containerView addSubview:fromView];
@@ -82,7 +88,8 @@
                                   lgf_ScreenHeight);
     }
 
-    // 执行转场动画 改变UI
+    // 执行自定义转场动画 改变UI
+    // Perform custom transition animations Change UI
     [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
         if (isPush) {
             mask.alpha = 0.6;
@@ -107,10 +114,11 @@
         }
     } completion:^(BOOL finished) {
         // 设置 transitionContext 通知系统动画执行完毕
+        // Set transitionContext to notify system animation completion
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
-        // 删除黑色遮罩
+        // Remove black mask
         [mask removeFromSuperview];
-        // 给 toVC 添加手势
+        // Add gestures to toVC
         self.toVC = toVC.navigationController.topViewController;
         [self.toVC lgf_AddUIScreenEdgePan];
     }];
@@ -125,7 +133,8 @@
 
 - (id <UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController
                           interactionControllerForAnimationController:(id <UIViewControllerAnimatedTransitioning>)animationController {
-    // 判断是否是手势返回
+    // 判断是否是手势pop
+    // Judge whether it is gesture pop
     if (self.toVC.lgf_InteractivePopTransition) {
         self.transitionDuration = self.lgf_TransitionDuration * 2;
         return self.toVC.lgf_InteractivePopTransition;
@@ -133,11 +142,5 @@
     self.transitionDuration = self.lgf_TransitionDuration;
     return nil;
 }
-
--(void)dealloc{
-    NSLog(@"tra dealloc");
-}
-
-
 
 @end

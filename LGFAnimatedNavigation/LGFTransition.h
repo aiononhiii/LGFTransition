@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface LGFTransition : NSObject <UIViewControllerAnimatedTransitioning,UINavigationControllerDelegate>
-// 自定义动画的时间
+// 自定义动画的时长
+// Custom animation Duration
 @property (nonatomic, assign) NSTimeInterval lgf_TransitionDuration;
 + (instancetype)shardLGFTransition;
 @end

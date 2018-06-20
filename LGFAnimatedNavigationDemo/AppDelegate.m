@@ -18,8 +18,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // 在这里配置是否使用自定义转场动画
+    // Configure whether to use a custom transition animation here
     [UINavigationController lgf_AnimatedTransitionIsUse:YES];
-    //[UINavigationController lgf_AnimatedTransitionIsUse:YES transitionDuration:1.0];
+    //[UINavigationController lgf_AnimatedTransitionIsUse:YES transitionDuration:2.0];
     return YES;
 }
 
