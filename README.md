@@ -11,7 +11,7 @@
 * pod 'LGFAnimatedNavigation' 或者  [LGFAnimatedNavigation](https://github.com/aiononhiii/LGFAnimatedNavigation)
 
 * 接着在 AppDelegate 中导入头文件 UINavigationController+LGFAnimatedTransition.h
-```
+```objc
 #import "UINavigationController+LGFAnimatedTransition.h"
 
 @interface AppDelegate ()
