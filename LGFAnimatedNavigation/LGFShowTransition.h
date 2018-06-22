@@ -1,5 +1,5 @@
 //
-//  LGFTransition.h
+//  LGFShowTransition.h
 //  LGF
 //
 //  Created by apple on 2017/6/13.
@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LGFTransition : NSObject <UIViewControllerAnimatedTransitioning,UINavigationControllerDelegate>
+@interface LGFShowTransition : NSObject <UIViewControllerAnimatedTransitioning, UINavigationControllerDelegate>
 // 自定义动画的时长
 // Custom animation Duration
 @property (nonatomic, assign) NSTimeInterval lgf_TransitionDuration;
-+ (instancetype)shardLGFTransition;
++ (instancetype)shardLGFShowTransition;
 @end
 

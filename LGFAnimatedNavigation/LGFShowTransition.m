@@ -1,13 +1,14 @@
 //
-//  LGFTransition.m
+//  LGFShowTransition.m
 //  LGF
 //
 //  Created by apple on 2017/6/13.
 //  Copyright © 2018年 来国锋. All rights reserved.
 //
 
-#import "LGFTransition.h"
+#import "LGFShowTransition.h"
 #import "UINavigationController+LGFAnimatedTransition.h"
+#import "UIViewController+LGFAnimatedTransition.h"
 #import <objc/runtime.h>
 
 #undef lgf_ScreenWidth
@@ -15,7 +16,7 @@
 #undef lgf_ScreenHeight
 #define lgf_ScreenHeight [[UIScreen mainScreen] bounds].size.height
 
-@interface LGFTransition()
+@interface LGFShowTransition()
 // Push 过去的 ViewController
 // Push ViewController
 @property(strong,nonatomic) UIViewController *toVC;
@@ -24,13 +25,13 @@
 @property (nonatomic, assign) NSTimeInterval transitionDuration;
 @end
 
-@implementation LGFTransition
+@implementation LGFShowTransition
 
-+ (instancetype)shardLGFTransition {
-    static LGFTransition *transition;
++ (instancetype)shardLGFShowTransition {
+    static LGFShowTransition *transition;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        transition = [[LGFTransition alloc] init];
+        transition = [[LGFShowTransition alloc] init];
     });
     return transition;
 }
@@ -119,8 +120,12 @@
         // Remove black mask
         [mask removeFromSuperview];
         // Add gestures to toVC
-        self.toVC = toVC.navigationController.topViewController;
-        [self.toVC lgf_AddUIScreenEdgePan];
+        if (![transitionContext transitionWasCancelled]) {
+            self.toVC = toVC;
+        } else {
+            self.toVC = fromVC;
+        }
+        [self.toVC lgf_AddPopPan:lgf_PopPan];
     }];
 }
 
@@ -133,11 +138,11 @@
 
 - (id <UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController
                           interactionControllerForAnimationController:(id <UIViewControllerAnimatedTransitioning>)animationController {
-    // 判断是否是手势pop
+    // 判断是否是手势 pop
     // Judge whether it is gesture pop
-    if (self.toVC.lgf_InteractivePopTransition) {
+    if (self.toVC.lgf_InteractiveTransition) {
         self.transitionDuration = self.lgf_TransitionDuration * 2;
-        return self.toVC.lgf_InteractivePopTransition;
+        return self.toVC.lgf_InteractiveTransition;
     }
     self.transitionDuration = self.lgf_TransitionDuration;
     return nil;

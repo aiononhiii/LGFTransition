@@ -20,8 +20,10 @@
 		18297A1B20D90942005DB4B7 /* back-black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18297A1920D90941005DB4B7 /* back-black@2x.png */; };
 		18297A1C20D90942005DB4B7 /* back-black@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18297A1A20D90941005DB4B7 /* back-black@3x.png */; };
 		18297A2E20DA3DD6005DB4B7 /* UINavigationController+LGFAnimatedTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 18297A2920DA3DD6005DB4B7 /* UINavigationController+LGFAnimatedTransition.m */; };
-		18297A2F20DA3DD6005DB4B7 /* LGFNavigationBackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 18297A2A20DA3DD6005DB4B7 /* LGFNavigationBackButton.m */; };
-		18297A3020DA3DD6005DB4B7 /* LGFTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 18297A2B20DA3DD6005DB4B7 /* LGFTransition.m */; };
+		18297A2F20DA3DD6005DB4B7 /* LGFBackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 18297A2A20DA3DD6005DB4B7 /* LGFBackButton.m */; };
+		18297A3020DA3DD6005DB4B7 /* LGFShowTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 18297A2B20DA3DD6005DB4B7 /* LGFShowTransition.m */; };
+		18297A3320DC8F4E005DB4B7 /* LGFModalTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 18297A3220DC8F4E005DB4B7 /* LGFModalTransition.m */; };
+		18297A3620DC9047005DB4B7 /* UIViewController+LGFAnimatedTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 18297A3520DC9047005DB4B7 /* UIViewController+LGFAnimatedTransition.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,12 +64,16 @@
 		18297A1620D8FCCC005DB4B7 /* back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@3x.png"; sourceTree = "<group>"; };
 		18297A1920D90941005DB4B7 /* back-black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-black@2x.png"; sourceTree = "<group>"; };
 		18297A1A20D90941005DB4B7 /* back-black@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-black@3x.png"; sourceTree = "<group>"; };
-		18297A2820DA3DD6005DB4B7 /* LGFTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGFTransition.h; sourceTree = "<group>"; };
+		18297A2820DA3DD6005DB4B7 /* LGFShowTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGFShowTransition.h; sourceTree = "<group>"; };
 		18297A2920DA3DD6005DB4B7 /* UINavigationController+LGFAnimatedTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+LGFAnimatedTransition.m"; sourceTree = "<group>"; };
-		18297A2A20DA3DD6005DB4B7 /* LGFNavigationBackButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGFNavigationBackButton.m; sourceTree = "<group>"; };
-		18297A2B20DA3DD6005DB4B7 /* LGFTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGFTransition.m; sourceTree = "<group>"; };
+		18297A2A20DA3DD6005DB4B7 /* LGFBackButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGFBackButton.m; sourceTree = "<group>"; };
+		18297A2B20DA3DD6005DB4B7 /* LGFShowTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGFShowTransition.m; sourceTree = "<group>"; };
 		18297A2C20DA3DD6005DB4B7 /* UINavigationController+LGFAnimatedTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+LGFAnimatedTransition.h"; sourceTree = "<group>"; };
-		18297A2D20DA3DD6005DB4B7 /* LGFNavigationBackButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGFNavigationBackButton.h; sourceTree = "<group>"; };
+		18297A2D20DA3DD6005DB4B7 /* LGFBackButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGFBackButton.h; sourceTree = "<group>"; };
+		18297A3120DC8F4E005DB4B7 /* LGFModalTransition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGFModalTransition.h; sourceTree = "<group>"; };
+		18297A3220DC8F4E005DB4B7 /* LGFModalTransition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGFModalTransition.m; sourceTree = "<group>"; };
+		18297A3420DC9047005DB4B7 /* UIViewController+LGFAnimatedTransition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LGFAnimatedTransition.h"; sourceTree = "<group>"; };
+		18297A3520DC9047005DB4B7 /* UIViewController+LGFAnimatedTransition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LGFAnimatedTransition.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,12 +163,16 @@
 		18297A2720DA3DD6005DB4B7 /* LGFAnimatedNavigation */ = {
 			isa = PBXGroup;
 			children = (
-				18297A2820DA3DD6005DB4B7 /* LGFTransition.h */,
-				18297A2B20DA3DD6005DB4B7 /* LGFTransition.m */,
+				18297A2820DA3DD6005DB4B7 /* LGFShowTransition.h */,
+				18297A2B20DA3DD6005DB4B7 /* LGFShowTransition.m */,
+				18297A3120DC8F4E005DB4B7 /* LGFModalTransition.h */,
+				18297A3220DC8F4E005DB4B7 /* LGFModalTransition.m */,
+				18297A2D20DA3DD6005DB4B7 /* LGFBackButton.h */,
+				18297A2A20DA3DD6005DB4B7 /* LGFBackButton.m */,
 				18297A2C20DA3DD6005DB4B7 /* UINavigationController+LGFAnimatedTransition.h */,
 				18297A2920DA3DD6005DB4B7 /* UINavigationController+LGFAnimatedTransition.m */,
-				18297A2D20DA3DD6005DB4B7 /* LGFNavigationBackButton.h */,
-				18297A2A20DA3DD6005DB4B7 /* LGFNavigationBackButton.m */,
+				18297A3420DC9047005DB4B7 /* UIViewController+LGFAnimatedTransition.h */,
+				18297A3520DC9047005DB4B7 /* UIViewController+LGFAnimatedTransition.m */,
 			);
 			path = LGFAnimatedNavigation;
 			sourceTree = "<group>";
@@ -301,9 +311,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18297A3020DA3DD6005DB4B7 /* LGFTransition.m in Sources */,
+				18297A3020DA3DD6005DB4B7 /* LGFShowTransition.m in Sources */,
 				182979DE20D8F5CE005DB4B7 /* ViewController.m in Sources */,
-				18297A2F20DA3DD6005DB4B7 /* LGFNavigationBackButton.m in Sources */,
+				18297A3620DC9047005DB4B7 /* UIViewController+LGFAnimatedTransition.m in Sources */,
+				18297A3320DC8F4E005DB4B7 /* LGFModalTransition.m in Sources */,
+				18297A2F20DA3DD6005DB4B7 /* LGFBackButton.m in Sources */,
 				18297A2E20DA3DD6005DB4B7 /* UINavigationController+LGFAnimatedTransition.m in Sources */,
 				182979E920D8F5D0005DB4B7 /* main.m in Sources */,
 				182979DB20D8F5CE005DB4B7 /* AppDelegate.m in Sources */,

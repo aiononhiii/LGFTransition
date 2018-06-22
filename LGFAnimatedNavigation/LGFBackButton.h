@@ -1,5 +1,5 @@
 //
-//  LGFNavigationBackButton.h
+//  LGFBackButton.h
 //  LGFOCTool
 //
 //  Created by apple on 2018/6/19.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LGFNavigationBackButton : UIButton
+@interface LGFBackButton : UIButton
 - (instancetype)initWithCoder:(NSCoder *)aDecoder;
 - (instancetype)initWithFrame:(CGRect)frame;
 @end
