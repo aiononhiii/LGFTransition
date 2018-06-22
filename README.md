@@ -40,4 +40,4 @@
 # Show效果展示
 ![LGFAnimatedNavigation](http://upload-images.jianshu.io/upload_images/2857609-ef8d00e335fcbf74.gif?imageMogr2/auto-orient/strip)
 # Modal效果展示
-![LGFAnimatedNavigation](https://upload-images.jianshu.io/upload_images/2857609-b3f059258c7153e1.gif?imageMogr2/auto-orient/strip)
+![LGFAnimatedNavigation](https://upload-images.jianshu.io/upload_images/2857609-0c5f2775db399d93.gif?imageMogr2/auto-orient/strip)
