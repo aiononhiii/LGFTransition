@@ -25,16 +25,19 @@
     // 在这里配置是否使用自定义转场动画
     // Configure whether to use a custom transition animation here
     [UINavigationController lgf_AnimatedTransitionIsUse:YES];
-    //[UINavigationController lgf_AnimatedTransitionIsUse:YES transitionDuration:1.0];
+//    [UINavigationController lgf_AnimatedTransitionIsUse:YES showDuration: 1.0 modalDuration:1.0];
     return YES;
 }
 ```
 * 在 didFinishLaunchingWithOptions 方法中调用 UINavigationController 由分类添加的新方法 lgf_AnimatedTransitionIsUse
 * 传 NO 或不掉用该方法 使用系统效果， 调用该方法并传 YES 启用本效果
-* transitionDuration 动画想要执行的时间，默认 0.5 秒
+* showDuration Show动画想要执行的时间，默认 0.5 秒
+* modalDuration Modal动画想要执行的时间，默认 0.5 秒
 
 # Demo 里还添加了一个可以让普通按钮变成pop返回按钮的 UIButton 父类
 * 自定义 NavigationBar 上的 UIButton 直接继承 LGFNavigationBackButton 就可以有pop返回的功能了
 
-# 效果展示
+# Show效果展示
 ![LGFAnimatedNavigation](http://upload-images.jianshu.io/upload_images/2857609-ef8d00e335fcbf74.gif?imageMogr2/auto-orient/strip)
+# Modal效果展示
+![LGFAnimatedNavigation](https://upload-images.jianshu.io/upload_images/2857609-b3f059258c7153e1.gif?imageMogr2/auto-orient/strip)
