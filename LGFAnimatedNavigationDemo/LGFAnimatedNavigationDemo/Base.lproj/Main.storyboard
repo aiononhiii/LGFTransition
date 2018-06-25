@@ -85,7 +85,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="xMF-ex-cyT" secondAttribute="height" multiplier="1:1" id="A4x-6K-unW"/>
                                         </constraints>
-                                        <state key="normal" image="back.png"/>
+                                        <state key="normal" image="back"/>
                                         <state key="highlighted" image="back-black.png"/>
                                     </button>
                                 </subviews>
@@ -158,7 +158,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="tSp-92-nJA" secondAttribute="height" multiplier="1:1" id="nQE-yC-MV4"/>
                                         </constraints>
-                                        <state key="normal" image="back.png"/>
+                                        <state key="normal" image="back"/>
                                         <state key="selected" image="back-black.png"/>
                                         <state key="highlighted" image="back-black.png"/>
                                     </button>
@@ -207,7 +207,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="WvB-BE-76l" secondAttribute="height" multiplier="1:1" id="FMh-Lg-3N2"/>
                                         </constraints>
-                                        <state key="normal" image="back.png"/>
+                                        <state key="normal" image="back"/>
                                         <state key="highlighted" image="back-black.png"/>
                                     </button>
                                 </subviews>
@@ -337,7 +337,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="back" width="15" height="24"/>
         <image name="back-black.png" width="10" height="19"/>
-        <image name="back.png" width="15" height="24"/>
     </resources>
 </document>

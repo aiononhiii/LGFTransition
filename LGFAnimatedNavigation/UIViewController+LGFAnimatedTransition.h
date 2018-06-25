@@ -61,8 +61,7 @@ UIKIT_EXTERN NSString *const lgf_IsUseLGFAnimatedTransitionKey;
 - (void)lgf_AddPopPan:(lgf_PanType)panType;
 #pragma mark - 是否使用了自定义的转场动画 / Whether to use a custom transition animation
 /**
- @param isUse 是否使用自定义的转场动画 / Whether to use a custom transition animation
  @param modalDuration Modal转场动画时长 / Animation duration
  */
-+ (void)lgf_AnimatedTransitionIsUse:(BOOL)isUse modalDuration:(NSTimeInterval)modalDuration;
++ (void)lgf_AnimatedTransitionModalDuration:(NSTimeInterval)modalDuration;
 @end

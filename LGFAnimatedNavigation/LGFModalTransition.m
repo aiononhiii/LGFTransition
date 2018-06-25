@@ -12,24 +12,16 @@
 // Push 过去的 ViewController
 // Push ViewController
 @property(strong,nonatomic) UIViewController *toVC;
-@property (nonatomic, assign) BOOL isPresenting;
-// 自定义动画的时长
-// Custom animation Duration
-@property (nonatomic, assign) NSTimeInterval transitionDuration;
+// 是否是 Present
+@property (nonatomic, assign) BOOL isPresent;
 @end
 
 @implementation LGFModalTransition
 
 lgf_AllocOnlyOnceForM(LGFModalTransition, LGFModalTransition);
 
-- (void)setLgf_TransitionDuration:(NSTimeInterval)lgf_TransitionDuration {
-    _lgf_TransitionDuration = lgf_TransitionDuration;
-    _transitionDuration = lgf_TransitionDuration;
-}
-
-
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext {
-    return self.transitionDuration;
+    return self.lgf_TransitionDuration;
 }
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext {
@@ -41,34 +33,27 @@ lgf_AllocOnlyOnceForM(LGFModalTransition, LGFModalTransition);
     // Present from ViewController
     UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     UIView *fromView = fromVC.view;
+    [containerView addSubview:fromView];
     
     // Present 后的 ViewController
     // Present to ViewController
     UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIView *toView = toVC.view;
-    
-    // 初始化 半透明黑色遮罩
-    // Initialization Translucent black mask
-    UIView *mask = [[UIView alloc] init];
-    mask.backgroundColor = [UIColor blackColor];
-    mask.frame = [[UIScreen mainScreen] bounds];
+    [containerView addSubview:toView];
     
     // 判断是 Present 还是 Dismiss 操作
     // Determine if it is a Present or Dismiss operation
-    if (self.isPresenting) {
-        mask.alpha = 0.0;
-        [containerView addSubview:fromView];
-        [containerView addSubview:toView];
-        [fromView addSubview:mask];
+    if (self.isPresent) {
+        [containerView bringSubviewToFront:toView];
         toView.frame = CGRectMake(0.0,
                                   lgf_ScreenHeight,
                                   lgf_ScreenWidth,
                                   lgf_ScreenHeight);
     } else  {
-        mask.alpha = 0.6;
-        [containerView addSubview:toView];
-        [containerView addSubview:fromView];
-        [toView addSubview:mask];
+        [containerView bringSubviewToFront:fromView];
+        fromView.layer.shadowColor = [UIColor blackColor].CGColor;
+        fromView.layer.shadowRadius = 5.0;
+        fromView.layer.shadowOpacity = 0.5;
         toView.frame = CGRectMake(0.0,
                                   0.0,
                                   lgf_ScreenWidth,
@@ -77,15 +62,13 @@ lgf_AllocOnlyOnceForM(LGFModalTransition, LGFModalTransition);
     
     // 执行自定义转场动画 改变UI
     // Perform custom transition animations Change UI
-    [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
-        if (self.isPresenting) {
-            mask.alpha = 0.6;
+    [UIView animateWithDuration:[self transitionDuration:transitionContext] delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        if (self.isPresent) {
             toView.frame = CGRectMake(toView.frame.origin.x,
                                       0.0,
                                       toView.frame.size.width,
                                       toView.frame.size.height);
         } else {
-            mask.alpha = 0.0;
             fromView.frame = CGRectMake(fromView.frame.origin.x,
                                         lgf_ScreenHeight,
                                         fromView.frame.size.width,
@@ -95,13 +78,18 @@ lgf_AllocOnlyOnceForM(LGFModalTransition, LGFModalTransition);
         // 设置 transitionContext 通知系统动画执行完毕
         // Set transitionContext to notify system animation completion
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
-        // Remove black mask
-        [mask removeFromSuperview];
+        // 删除阴影
+        // Remove shadow
+        fromView.layer.shadowOpacity = 0.0;
+        // 判断转场是否取消
+        // Determine whether the transition is canceled
         if (![transitionContext transitionWasCancelled]) {
             self.toVC = toVC;
         } else {
             self.toVC = fromVC;
         }
+        // 给 self.toVC 添加手势
+        // Add gestures to toVC
         [self.toVC lgf_AddPopPan:lgf_DismissPan];
     }];
 }
@@ -115,24 +103,19 @@ lgf_AllocOnlyOnceForM(LGFModalTransition, LGFModalTransition);
 }
 
 - (nullable id <UIViewControllerInteractiveTransitioning>)interactionControllerForPresentation:(id <UIViewControllerAnimatedTransitioning>)animator {
-    self.isPresenting = YES;
+    self.isPresent = YES;
     return [self interactionControllerForAll];
 }
 
 - (nullable id<UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id<UIViewControllerAnimatedTransitioning>)animator {
-    self.isPresenting = NO;
+    self.isPresent = NO;
     return [self interactionControllerForAll];
 }
 
 - (nullable id<UIViewControllerInteractiveTransitioning>)interactionControllerForAll {
     // 判断是否是手势 dismiss
     // Judge whether it is gesture dismiss
-    if (self.toVC.lgf_InteractiveTransition) {
-        self.transitionDuration = self.lgf_TransitionDuration * 2;
-        return self.toVC.lgf_InteractiveTransition;
-    }
-    self.transitionDuration = self.lgf_TransitionDuration;
-    return nil;
+    return self.toVC.lgf_InteractiveTransition;
 }
 
 @end

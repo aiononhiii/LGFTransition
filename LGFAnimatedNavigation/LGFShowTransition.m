@@ -12,22 +12,16 @@
 // Push 过去的 ViewController
 // Push ViewController
 @property(strong,nonatomic) UIViewController *toVC;
-// 自定义动画的时长
-// Custom animation Duration
-@property (nonatomic, assign) NSTimeInterval transitionDuration;
+// 是否是 Push
+@property (nonatomic, assign) BOOL isPush;
 @end
 
 @implementation LGFShowTransition
 
 lgf_AllocOnlyOnceForM(LGFShowTransition, LGFShowTransition);
 
-- (void)setLgf_TransitionDuration:(NSTimeInterval)lgf_TransitionDuration {
-    _lgf_TransitionDuration = lgf_TransitionDuration;
-    _transitionDuration = lgf_TransitionDuration;
-}
-
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext {
-    return self.transitionDuration;
+    return self.lgf_TransitionDuration;
 }
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext {
@@ -39,36 +33,28 @@ lgf_AllocOnlyOnceForM(LGFShowTransition, LGFShowTransition);
     // Push from ViewController
     UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     UIView *fromView = fromVC.view;
+    [containerView addSubview:fromView];
     
     // Push 后的 ViewController
     // Push to ViewController
     UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIView *toView = toVC.view;
-
-    // 初始化 半透明黑色遮罩
-    // Initialization Translucent black mask
-    UIView *mask = [[UIView alloc] init];
-    mask.backgroundColor = [UIColor blackColor];
-    mask.frame = [[UIScreen mainScreen] bounds];
-
+    [containerView addSubview:toView];
+    
     // 判断是 push 还是 pop 操作
     // Determine if it is a push or pop operation
-    BOOL isPush = ([toVC.navigationController.viewControllers indexOfObject:toVC] > [fromVC.navigationController.viewControllers indexOfObject:fromVC]);
-    if (isPush) {
-        mask.alpha = 0.0;
-        [containerView addSubview:fromView];
-        [containerView addSubview:toView];
-        [fromView addSubview:mask];
+    if (self.isPush) {
+        [containerView bringSubviewToFront:toView];
         toView.frame = CGRectMake(lgf_ScreenWidth,
                                   0.0,
                                   lgf_ScreenWidth,
                                   lgf_ScreenHeight);
     } else {
-        mask.alpha = 0.6;
-        [containerView addSubview:toView];
-        [containerView addSubview:fromView];
-        [toView addSubview:mask];
-        toView.frame = CGRectMake(-(lgf_ScreenWidth / 3),
+        [containerView bringSubviewToFront:fromView];
+        fromView.layer.shadowColor = [UIColor blackColor].CGColor;
+        fromView.layer.shadowRadius = 5.0;
+        fromView.layer.shadowOpacity = 0.5;
+        toView.frame = CGRectMake(-(lgf_ScreenWidth / 2),
                                   0.0,
                                   lgf_ScreenWidth,
                                   lgf_ScreenHeight);
@@ -76,10 +62,9 @@ lgf_AllocOnlyOnceForM(LGFShowTransition, LGFShowTransition);
 
     // 执行自定义转场动画 改变UI
     // Perform custom transition animations Change UI
-    [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
-        if (isPush) {
-            mask.alpha = 0.6;
-            fromView.frame = CGRectMake(-(lgf_ScreenWidth / 3),
+    [UIView animateWithDuration:[self transitionDuration:transitionContext] delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        if (self.isPush) {
+            fromView.frame = CGRectMake(-(lgf_ScreenWidth / 2),
                                         fromView.frame.origin.y,
                                         lgf_ScreenWidth,
                                         fromView.frame.size.height);
@@ -88,7 +73,6 @@ lgf_AllocOnlyOnceForM(LGFShowTransition, LGFShowTransition);
                                       lgf_ScreenWidth,
                                       fromView.frame.size.height);
         } else {
-            mask.alpha = 0.0;
             toView.frame = CGRectMake(0.0,
                                       toView.frame.origin.y,
                                       lgf_ScreenWidth,
@@ -102,14 +86,18 @@ lgf_AllocOnlyOnceForM(LGFShowTransition, LGFShowTransition);
         // 设置 transitionContext 通知系统动画执行完毕
         // Set transitionContext to notify system animation completion
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
-        // Remove black mask
-        [mask removeFromSuperview];
-        // Add gestures to toVC
+        // 删除阴影
+        // Remove shadow
+        fromView.layer.shadowOpacity = 0.0;
+        // 判断转场是否取消
+        // Determine whether the transition is canceled
         if (![transitionContext transitionWasCancelled]) {
             self.toVC = toVC;
         } else {
             self.toVC = fromVC;
         }
+        // 给 self.toVC 添加手势
+        // Add gestures to toVC
         [self.toVC lgf_AddPopPan:lgf_PopPan];
     }];
 }
@@ -118,6 +106,11 @@ lgf_AllocOnlyOnceForM(LGFShowTransition, LGFShowTransition);
                                    animationControllerForOperation:(UINavigationControllerOperation)operation
                                                 fromViewController:(UIViewController *)fromVC
                                                   toViewController:(UIViewController *)toVC {
+    if (operation == UINavigationControllerOperationPush) {
+        self.isPush = YES;
+    } else {
+        self.isPush = NO;
+    }
     return self;
 }
 
@@ -125,12 +118,7 @@ lgf_AllocOnlyOnceForM(LGFShowTransition, LGFShowTransition);
                           interactionControllerForAnimationController:(id <UIViewControllerAnimatedTransitioning>)animationController {
     // 判断是否是手势 pop
     // Judge whether it is gesture pop
-    if (self.toVC.lgf_InteractiveTransition) {
-        self.transitionDuration = self.lgf_TransitionDuration * 2;
-        return self.toVC.lgf_InteractiveTransition;
-    }
-    self.transitionDuration = self.lgf_TransitionDuration;
-    return nil;
+    return self.toVC.lgf_InteractiveTransition;
 }
 
 @end

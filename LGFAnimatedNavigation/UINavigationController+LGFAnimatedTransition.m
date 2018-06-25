@@ -16,13 +16,14 @@ NS_ASSUME_NONNULL_BEGIN
 @implementation UINavigationController (LGFAnimatedTransition)
 
 + (void)lgf_AnimatedTransitionIsUse:(BOOL)isUse {
-    [self lgf_AnimatedTransitionIsUse:isUse showDuration:0.5 modalDuration:0.5];
+    [self lgf_AnimatedTransitionIsUse:isUse showDuration:0.5 modalDuration:0.6];
 }
 
 + (void)lgf_AnimatedTransitionIsUse:(BOOL)isUse showDuration:(NSTimeInterval)showDuration modalDuration:(NSTimeInterval)modalDuration {
-    [UIViewController lgf_AnimatedTransitionIsUse:isUse modalDuration:modalDuration];
     if (isUse) {
-        if (!showDuration || showDuration == 0) {
+        [UIViewController lgf_AnimatedTransitionModalDuration:modalDuration];
+        if (showDuration <= 0) {
+            // 默认 0.5 / defult 0.5
             [LGFShowTransition sharedLGFShowTransition].lgf_TransitionDuration = 0.5;
         } else {
             [LGFShowTransition sharedLGFShowTransition].lgf_TransitionDuration = showDuration;
