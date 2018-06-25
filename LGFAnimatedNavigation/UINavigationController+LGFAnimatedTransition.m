@@ -2,7 +2,7 @@
 //  UINavigationController+LGFAnimatedTransition.m
 //  LGF
 //
-//  Created by apple on 2017/6/13.
+//  Created by apple on 2018/6/13.
 //  Copyright © 2018年 来国锋. All rights reserved.
 //
 
@@ -23,9 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
     [UIViewController lgf_AnimatedTransitionIsUse:isUse modalDuration:modalDuration];
     if (isUse) {
         if (!showDuration || showDuration == 0) {
-            [LGFShowTransition shardLGFShowTransition].lgf_TransitionDuration = 0.5;
+            [LGFShowTransition sharedLGFShowTransition].lgf_TransitionDuration = 0.5;
         } else {
-            [LGFShowTransition shardLGFShowTransition].lgf_TransitionDuration = showDuration;
+            [LGFShowTransition sharedLGFShowTransition].lgf_TransitionDuration = showDuration;
         }
         // 是否使用自定义转场动画
         // Whether to use a custom transition animation
@@ -35,12 +35,12 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)lgf_PushViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    self.delegate = [LGFShowTransition shardLGFShowTransition];
+    self.delegate = [LGFShowTransition sharedLGFShowTransition];
     [self lgf_PushViewController:viewController animated:YES];
 }
 
 - (nullable UIViewController *)lgf_PopViewControllerAnimated:(BOOL)animated {
-    self.delegate = [LGFShowTransition shardLGFShowTransition];
+    self.delegate = [LGFShowTransition sharedLGFShowTransition];
     return [self lgf_PopViewControllerAnimated:YES];
 }
 

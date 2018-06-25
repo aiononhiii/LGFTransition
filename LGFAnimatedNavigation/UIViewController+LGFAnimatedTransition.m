@@ -42,9 +42,9 @@ NSString *const lgf_IsUseLGFAnimatedTransitionKey = @"lgf_IsUseLGFAnimatedTransi
 + (void)lgf_AnimatedTransitionIsUse:(BOOL)isUse modalDuration:(NSTimeInterval)modalDuration {
     if (isUse) {
         if (!modalDuration || modalDuration == 0) {
-            [LGFModalTransition shardLGFModalTransition].lgf_TransitionDuration = 0.5;
+            [LGFModalTransition sharedLGFModalTransition].lgf_TransitionDuration = 0.5;
         } else {
-            [LGFModalTransition shardLGFModalTransition].lgf_TransitionDuration = modalDuration;
+            [LGFModalTransition sharedLGFModalTransition].lgf_TransitionDuration = modalDuration;
         }
         // 如果使用自定义转场动画，那么隐藏所有navigationBar，全部使用自定义，手动添加的返回按钮直接继承我的 LGFBackButton 就可以自动 pop 了
         // If you use a custom transition animation, then hide all navigationBar, all use the custom, manually add the return button directly inherited my LGFBackButton can automatically pop up
@@ -58,12 +58,12 @@ NSString *const lgf_IsUseLGFAnimatedTransitionKey = @"lgf_IsUseLGFAnimatedTransi
 }
 
 - (void)lgf_PresentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^)(void))completion {
-    viewControllerToPresent.transitioningDelegate = [LGFModalTransition shardLGFModalTransition];
+    viewControllerToPresent.transitioningDelegate = [LGFModalTransition sharedLGFModalTransition];
     [self lgf_PresentViewController:viewControllerToPresent animated:YES completion:completion];
 }
 
 - (void)lgf_DismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion {
-    self.transitioningDelegate = [LGFModalTransition shardLGFModalTransition];
+    self.transitioningDelegate = [LGFModalTransition sharedLGFModalTransition];
     [self lgf_DismissViewControllerAnimated:YES completion:completion];
 }
 

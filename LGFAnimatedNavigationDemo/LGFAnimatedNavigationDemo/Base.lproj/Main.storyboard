@@ -68,7 +68,7 @@
         <!--View Controller-->
         <scene sceneID="8Ts-1m-Onk">
             <objects>
-                <viewController id="IHC-Nc-iOc" sceneMemberID="viewController">
+                <viewController id="IHC-Nc-iOc" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VR3-qf-bms"/>
                         <viewControllerLayoutGuide type="bottom" id="p7H-Zb-LzM"/>
@@ -128,7 +128,7 @@
         <!--View Controller-->
         <scene sceneID="OwQ-az-vVz">
             <objects>
-                <viewController storyboardIdentifier="ViewController2" id="tBw-Zb-Gns" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController2" id="tBw-Zb-Gns" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Gb2-2w-mQj"/>
                         <viewControllerLayoutGuide type="bottom" id="QVT-dA-Vlo"/>
@@ -190,7 +190,7 @@
         <!--View Controller-->
         <scene sceneID="Etw-D0-zkD">
             <objects>
-                <viewController storyboardIdentifier="ViewController3" id="bfX-49-ueq" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController3" id="bfX-49-ueq" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ffo-je-D6Q"/>
                         <viewControllerLayoutGuide type="bottom" id="Ye6-S7-dZY"/>
@@ -260,7 +260,7 @@
         <!--View Controller-->
         <scene sceneID="7gM-Ky-zL1">
             <objects>
-                <viewController id="cZZ-Uo-8Cl" sceneMemberID="viewController">
+                <viewController id="cZZ-Uo-8Cl" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="S8g-mH-eDi"/>
                         <viewControllerLayoutGuide type="bottom" id="Wg3-2T-18L"/>
@@ -307,7 +307,7 @@
         <!--View Controller-->
         <scene sceneID="PYH-Mn-OTf">
             <objects>
-                <viewController id="jfj-Wa-LTw" sceneMemberID="viewController">
+                <viewController id="jfj-Wa-LTw" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mJv-oE-QyY"/>
                         <viewControllerLayoutGuide type="bottom" id="2bZ-2L-zyH"/>

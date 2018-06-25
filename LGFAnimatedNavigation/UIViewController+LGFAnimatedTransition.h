@@ -12,6 +12,39 @@
 #define lgf_ScreenWidth [[UIScreen mainScreen] bounds].size.width
 #undef lgf_ScreenHeight
 #define lgf_ScreenHeight [[UIScreen mainScreen] bounds].size.height
+#undef lgf_AllocOnlyOnceForH
+#define lgf_AllocOnlyOnceForH(methodName) + (instancetype)shared##methodName
+#undef lgf_AllocOnlyOnceForM
+#define lgf_AllocOnlyOnceForM(name,methodName) static name* _instance;\
++ (instancetype)allocWithZone:(struct _NSZone *)zone\
+{\
+static dispatch_once_t onceToken;\
+dispatch_once(&onceToken, ^{\
+_instance = [super allocWithZone:zone];\
+});\
+return _instance;\
+}\
+\
++ (instancetype)shared##methodName{\
+\
+return [[name alloc] init];\
+}\
+- (instancetype)init{\
+static dispatch_once_t onceToken;\
+dispatch_once(&onceToken, ^{\
+_instance = [super init];\
+});\
+return _instance;\
+}\
+\
+- (instancetype)copyWithZone:(NSZone *)zone\
+{\
+return _instance;\
+}\
+- (instancetype)mutableCopyWithZone:(NSZone *)zone\
+{\
+return _instance;\
+}
 
 typedef NS_ENUM(NSUInteger, lgf_PanType) {
     lgf_PopPan,

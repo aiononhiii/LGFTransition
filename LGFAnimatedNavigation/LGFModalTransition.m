@@ -7,7 +7,6 @@
 //
 
 #import "LGFModalTransition.h"
-#import "UIViewController+LGFAnimatedTransition.h"
 
 @interface LGFModalTransition()
 // Push 过去的 ViewController
@@ -21,14 +20,7 @@
 
 @implementation LGFModalTransition
 
-+ (instancetype)shardLGFModalTransition {
-    static LGFModalTransition *transition;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        transition = [[LGFModalTransition alloc] init];
-    });
-    return transition;
-}
+lgf_AllocOnlyOnceForM(LGFModalTransition, LGFModalTransition);
 
 - (void)setLgf_TransitionDuration:(NSTimeInterval)lgf_TransitionDuration {
     _lgf_TransitionDuration = lgf_TransitionDuration;

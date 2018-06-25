@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIViewController+LGFAnimatedTransition.h"
 
 @interface LGFModalTransition : NSObject <UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate>
 // 自定义动画的时长
 // Custom animation Duration
 @property (nonatomic, assign) NSTimeInterval lgf_TransitionDuration;
-+ (instancetype)shardLGFModalTransition;
+lgf_AllocOnlyOnceForH(LGFModalTransition);
 @end

@@ -2,14 +2,11 @@
 //  LGFShowTransition.m
 //  LGF
 //
-//  Created by apple on 2017/6/13.
+//  Created by apple on 2018/6/13.
 //  Copyright © 2018年 来国锋. All rights reserved.
 //
 
 #import "LGFShowTransition.h"
-#import "UINavigationController+LGFAnimatedTransition.h"
-#import "UIViewController+LGFAnimatedTransition.h"
-#import <objc/runtime.h>
 
 @interface LGFShowTransition()
 // Push 过去的 ViewController
@@ -22,14 +19,7 @@
 
 @implementation LGFShowTransition
 
-+ (instancetype)shardLGFShowTransition {
-    static LGFShowTransition *transition;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        transition = [[LGFShowTransition alloc] init];
-    });
-    return transition;
-}
+lgf_AllocOnlyOnceForM(LGFShowTransition, LGFShowTransition);
 
 - (void)setLgf_TransitionDuration:(NSTimeInterval)lgf_TransitionDuration {
     _lgf_TransitionDuration = lgf_TransitionDuration;

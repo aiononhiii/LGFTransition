@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
 s.name        = "LGFAnimatedNavigation"
-s.version     = "0.0.5"
+s.version     = "0.0.6"
 s.summary     = "LGFAnimatedNavigation"
 s.homepage    = "https://github.com/aiononhiii/LGFAnimatedNavigation"
 s.license     = { :type => 'MIT', :file => 'LICENSE' }
