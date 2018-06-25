@@ -37,7 +37,7 @@
 # Demo 里还添加了一个可以让普通按钮变成pop返回按钮的 UIButton 父类
 * 自定义 NavigationBar 上的 UIButton 直接继承 LGFNavigationBackButton 就可以有pop返回的功能了
 
-# Show效果展示
-![LGFAnimatedNavigation](http://upload-images.jianshu.io/upload_images/2857609-ef8d00e335fcbf74.gif?imageMogr2/auto-orient/strip)
-# Modal效果展示
-![LGFAnimatedNavigation](https://upload-images.jianshu.io/upload_images/2857609-0c5f2775db399d93.gif?imageMogr2/auto-orient/strip)
+# Show 效果展示
+![Show 效果展示](https://upload-images.jianshu.io/upload_images/2857609-302c44ba835cc67b.gif?imageMogr2/auto-orient/strip)
+# Modal 效果展示
+![Modal 效果展示](https://upload-images.jianshu.io/upload_images/2857609-96d9ab5b83d3576d.gif?imageMogr2/auto-orient/strip)
