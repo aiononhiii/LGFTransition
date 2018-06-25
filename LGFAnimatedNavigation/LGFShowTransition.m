@@ -11,11 +11,6 @@
 #import "UIViewController+LGFAnimatedTransition.h"
 #import <objc/runtime.h>
 
-#undef lgf_ScreenWidth
-#define lgf_ScreenWidth [[UIScreen mainScreen] bounds].size.width
-#undef lgf_ScreenHeight
-#define lgf_ScreenHeight [[UIScreen mainScreen] bounds].size.height
-
 @interface LGFShowTransition()
 // Push 过去的 ViewController
 // Push ViewController
@@ -83,7 +78,7 @@
         [containerView addSubview:toView];
         [containerView addSubview:fromView];
         [toView addSubview:mask];
-        toView.frame = CGRectMake(-(lgf_ScreenWidth / 2),
+        toView.frame = CGRectMake(-(lgf_ScreenWidth / 3),
                                   0.0,
                                   lgf_ScreenWidth,
                                   lgf_ScreenHeight);
@@ -94,7 +89,7 @@
     [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
         if (isPush) {
             mask.alpha = 0.6;
-            fromView.frame = CGRectMake(-(lgf_ScreenWidth / 2),
+            fromView.frame = CGRectMake(-(lgf_ScreenWidth / 3),
                                         fromView.frame.origin.y,
                                         lgf_ScreenWidth,
                                         fromView.frame.size.height);

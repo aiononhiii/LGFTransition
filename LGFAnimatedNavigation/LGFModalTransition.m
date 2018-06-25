@@ -9,11 +9,6 @@
 #import "LGFModalTransition.h"
 #import "UIViewController+LGFAnimatedTransition.h"
 
-#undef lgf_ScreenWidth
-#define lgf_ScreenWidth [[UIScreen mainScreen] bounds].size.width
-#undef lgf_ScreenHeight
-#define lgf_ScreenHeight [[UIScreen mainScreen] bounds].size.height
-
 @interface LGFModalTransition()
 // Push 过去的 ViewController
 // Push ViewController
@@ -50,13 +45,13 @@
     // Transition container
     UIView *containerView = [transitionContext containerView];
     
-    // Push 前的 ViewController
-    // Push from ViewController
+    // Present 前的 ViewController
+    // Present from ViewController
     UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     UIView *fromView = fromVC.view;
     
-    // Push 后的 ViewController
-    // Push to ViewController
+    // Present 后的 ViewController
+    // Present to ViewController
     UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIView *toView = toVC.view;
     
@@ -66,8 +61,8 @@
     mask.backgroundColor = [UIColor blackColor];
     mask.frame = [[UIScreen mainScreen] bounds];
     
-    // 判断是 push 还是 pop 操作
-    // Determine if it is a push or pop operation
+    // 判断是 Present 还是 Dismiss 操作
+    // Determine if it is a Present or Dismiss operation
     if (self.isPresenting) {
         mask.alpha = 0.0;
         [containerView addSubview:fromView];
@@ -83,7 +78,7 @@
         [containerView addSubview:fromView];
         [toView addSubview:mask];
         toView.frame = CGRectMake(0.0,
-                                  -(lgf_ScreenHeight / 2),
+                                  0.0,
                                   lgf_ScreenWidth,
                                   lgf_ScreenHeight);
     }
@@ -93,20 +88,12 @@
     [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
         if (self.isPresenting) {
             mask.alpha = 0.6;
-            fromView.frame = CGRectMake(fromView.frame.origin.x,
-                                        -(lgf_ScreenHeight / 2),
-                                        fromView.frame.size.width,
-                                        fromView.frame.size.height);
             toView.frame = CGRectMake(toView.frame.origin.x,
                                       0.0,
-                                      fromView.frame.size.width,
-                                      fromView.frame.size.height);
+                                      toView.frame.size.width,
+                                      toView.frame.size.height);
         } else {
             mask.alpha = 0.0;
-            toView.frame = CGRectMake(toView.frame.origin.x,
-                                      0.0,
-                                      fromView.frame.size.width,
-                                      fromView.frame.size.height);
             fromView.frame = CGRectMake(fromView.frame.origin.x,
                                         lgf_ScreenHeight,
                                         fromView.frame.size.width,

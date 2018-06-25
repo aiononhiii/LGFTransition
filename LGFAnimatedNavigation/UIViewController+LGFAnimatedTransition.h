@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#undef lgf_ScreenWidth
+#define lgf_ScreenWidth [[UIScreen mainScreen] bounds].size.width
+#undef lgf_ScreenHeight
+#define lgf_ScreenHeight [[UIScreen mainScreen] bounds].size.height
+
 typedef NS_ENUM(NSUInteger, lgf_PanType) {
     lgf_PopPan,
     lgf_DismissPan,
