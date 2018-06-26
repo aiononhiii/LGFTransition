@@ -50,7 +50,6 @@ NSString *const lgf_IsUseLGFAnimatedTransitionKey = @"lgf_IsUseLGFAnimatedTransi
     }
     // 如果使用自定义转场动画，那么隐藏所有navigationBar，全部使用自定义，手动添加的返回按钮直接继承我的 LGFBackButton 就可以自动 pop 了
     // If you use a custom transition animation, then hide all navigationBar, all use the custom, manually add the return button directly inherited my LGFBackButton can automatically pop up
-    method_exchangeImplementations(class_getInstanceMethod([self class], @selector(viewWillDisappear:)), class_getInstanceMethod([self class], @selector(lgf_AnimatedTransitionViewWillDisappear:)));
     method_exchangeImplementations(class_getInstanceMethod([self class], @selector(viewWillAppear:)), class_getInstanceMethod([self class], @selector(lgf_AnimatedTransitionViewWillAppear:)));
     // 在模态跳转中也同样使用自定义动画时长
     // Same custom animation duration in modal
@@ -59,17 +58,21 @@ NSString *const lgf_IsUseLGFAnimatedTransitionKey = @"lgf_IsUseLGFAnimatedTransi
 }
 
 - (void)lgf_PresentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^)(void))completion {
-    viewControllerToPresent.transitioningDelegate = [LGFModalTransition sharedLGFModalTransition];
+    // 确保 modalPresentationStyle 是 UIModalPresentationFullScreen 才使用 LGFModalTransition 自定义动画, 使其不影响系统其他的 Present, 比如 UIAlertViewController
+    // Make sure modalPresentationStyle is UIModalPresentationFullScreen to use LGFModalTransition custom animation so that it does not affect other Present of the system, such as UIAlertViewController
+    if (viewControllerToPresent.modalPresentationStyle == UIModalPresentationFullScreen) {
+        viewControllerToPresent.transitioningDelegate = [LGFModalTransition sharedLGFModalTransition];
+    }
     [self lgf_PresentViewController:viewControllerToPresent animated:YES completion:completion];
 }
 
 - (void)lgf_DismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion {
-    self.transitioningDelegate = [LGFModalTransition sharedLGFModalTransition];
+    // 确保是 UIModalPresentationFullScreen 才使用这个自定义动画，使其不影响系统其他的 Dismiss 比如 UIAlertViewController
+    // Make sure modalPresentationStyle is UIModalPresentationFullScreen to use LGFModalTransition custom animation so that it does not affect other Dismiss of the system, such as UIAlertViewController
+    if (self.modalPresentationStyle == UIModalPresentationFullScreen) {
+        self.transitioningDelegate = [LGFModalTransition sharedLGFModalTransition];
+    }
     [self lgf_DismissViewControllerAnimated:YES completion:completion];
-}
-
-- (void)lgf_AnimatedTransitionViewWillDisappear:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:YES];
 }
 
 - (void)lgf_AnimatedTransitionViewWillAppear:(BOOL)animated {
