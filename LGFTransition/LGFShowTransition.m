@@ -52,7 +52,7 @@ lgf_AllocOnlyOnceForM(LGFShowTransition, LGFShowTransition);
     } else {
         [containerView bringSubviewToFront:fromView];
         fromView.layer.shadowColor = [UIColor blackColor].CGColor;
-        fromView.layer.shadowRadius = 5.0;
+        fromView.layer.shadowRadius = 15.0;
         fromView.layer.shadowOpacity = 0.5;
         toView.frame = CGRectMake(-(lgf_ScreenWidth / 2),
                                   0.0,

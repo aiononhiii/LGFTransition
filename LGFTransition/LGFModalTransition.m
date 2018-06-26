@@ -52,7 +52,7 @@ lgf_AllocOnlyOnceForM(LGFModalTransition, LGFModalTransition);
     } else  {
         [containerView bringSubviewToFront:fromView];
         fromView.layer.shadowColor = [UIColor blackColor].CGColor;
-        fromView.layer.shadowRadius = 3.0;
+        fromView.layer.shadowRadius = 15.0;
         fromView.layer.shadowOpacity = 0.5;
         toView.frame = CGRectMake(0.0,
                                   0.0,
