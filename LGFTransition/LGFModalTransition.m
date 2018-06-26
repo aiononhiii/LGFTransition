@@ -11,7 +11,7 @@
 @interface LGFModalTransition()
 // Push 过去的 ViewController
 // Push ViewController
-@property(strong,nonatomic) UIViewController *toVC;
+@property(nonatomic, strong) UIViewController *toVC;
 // 是否是 Present
 @property (nonatomic, assign) BOOL isPresent;
 @end
@@ -52,7 +52,7 @@ lgf_AllocOnlyOnceForM(LGFModalTransition, LGFModalTransition);
     } else  {
         [containerView bringSubviewToFront:fromView];
         fromView.layer.shadowColor = [UIColor blackColor].CGColor;
-        fromView.layer.shadowRadius = 5.0;
+        fromView.layer.shadowRadius = 3.0;
         fromView.layer.shadowOpacity = 0.5;
         toView.frame = CGRectMake(0.0,
                                   0.0,

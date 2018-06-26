@@ -106,8 +106,8 @@ NSString *const lgf_IsUseLGFAnimatedTransitionKey = @"lgf_IsUseLGFAnimatedTransi
         // Update transition progress
         [self.lgf_InteractiveTransition updateInteractiveTransition:progress];
     } else {
-        // 如果滑动范围大于40％，则交互完成，否则交互取消
-        // If the sliding range is greater than 40%, the interaction finish, else, the interaction cancel
+        // 如果滑动范围大于 40％(Pop) / 20%(Dismiss)，则交互完成，否则交互取消
+        // If the sliding range is greater than 40％(Pop) / 20%(Dismiss), the interaction finish, else, the interaction cancel
         if (progress > (self.lgf_PanType == lgf_PopPan ? 0.4 : 0.2)) {
             [self.lgf_InteractiveTransition finishInteractiveTransition];
         } else {

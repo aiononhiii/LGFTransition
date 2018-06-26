@@ -11,7 +11,7 @@
 @interface LGFShowTransition()
 // Push 过去的 ViewController
 // Push ViewController
-@property(strong,nonatomic) UIViewController *toVC;
+@property(nonatomic, strong) UIViewController *toVC;
 // 是否是 Push
 @property (nonatomic, assign) BOOL isPush;
 @end
