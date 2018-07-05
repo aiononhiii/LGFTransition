@@ -20,6 +20,12 @@
 		18297A5520E1CCF5005DB4B7 /* LGFShowTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 18297A4D20E1CCF5005DB4B7 /* LGFShowTransition.m */; };
 		18297A5620E1CCF5005DB4B7 /* UIViewController+LGFAnimatedTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 18297A4E20E1CCF5005DB4B7 /* UIViewController+LGFAnimatedTransition.m */; };
 		18297A5720E1CCF5005DB4B7 /* LGFBackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 18297A4F20E1CCF5005DB4B7 /* LGFBackButton.m */; };
+		18585E8420E5E4AA0084D5C1 /* LGFTabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18585E8320E5E4AA0084D5C1 /* LGFTabBarVC.m */; };
+		18585E8720E5E4FC0084D5C1 /* TwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18585E8620E5E4FC0084D5C1 /* TwoViewController.m */; };
+		18585E8A20E9C5AD0084D5C1 /* TabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18585E8920E9C5AD0084D5C1 /* TabBarVC.m */; };
+		18585E8D20EA21520084D5C1 /* ThreeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18585E8C20EA21520084D5C1 /* ThreeViewController.m */; };
+		18585E8F20EA2A4A0084D5C1 /* LGFTabBarVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18585E8E20EA2A4A0084D5C1 /* LGFTabBarVC.storyboard */; };
+		35FEC3F43F1DA2EF5A528DBE /* libPods-LGFAnimatedNavigationDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 833ABB1AE0A51CDB8750CA0B /* libPods-LGFAnimatedNavigationDemo.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +72,18 @@
 		18297A5020E1CCF5005DB4B7 /* UINavigationController+LGFAnimatedTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+LGFAnimatedTransition.h"; sourceTree = "<group>"; };
 		18297A5120E1CCF5005DB4B7 /* LGFModalTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGFModalTransition.h; sourceTree = "<group>"; };
 		18297A5220E1CCF5005DB4B7 /* LGFShowTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGFShowTransition.h; sourceTree = "<group>"; };
+		18585E8220E5E4AA0084D5C1 /* LGFTabBarVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LGFTabBarVC.h; sourceTree = "<group>"; };
+		18585E8320E5E4AA0084D5C1 /* LGFTabBarVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LGFTabBarVC.m; sourceTree = "<group>"; };
+		18585E8520E5E4FC0084D5C1 /* TwoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwoViewController.h; sourceTree = "<group>"; };
+		18585E8620E5E4FC0084D5C1 /* TwoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwoViewController.m; sourceTree = "<group>"; };
+		18585E8820E9C5AD0084D5C1 /* TabBarVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabBarVC.h; sourceTree = "<group>"; };
+		18585E8920E9C5AD0084D5C1 /* TabBarVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabBarVC.m; sourceTree = "<group>"; };
+		18585E8B20EA21520084D5C1 /* ThreeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThreeViewController.h; sourceTree = "<group>"; };
+		18585E8C20EA21520084D5C1 /* ThreeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThreeViewController.m; sourceTree = "<group>"; };
+		18585E8E20EA2A4A0084D5C1 /* LGFTabBarVC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LGFTabBarVC.storyboard; sourceTree = "<group>"; };
+		7BDAEB2FA9C1342F5099363B /* Pods-LGFAnimatedNavigationDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LGFAnimatedNavigationDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-LGFAnimatedNavigationDemo/Pods-LGFAnimatedNavigationDemo.release.xcconfig"; sourceTree = "<group>"; };
+		833ABB1AE0A51CDB8750CA0B /* libPods-LGFAnimatedNavigationDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LGFAnimatedNavigationDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D23127F1FF92546A08B5C52E /* Pods-LGFAnimatedNavigationDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LGFAnimatedNavigationDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LGFAnimatedNavigationDemo/Pods-LGFAnimatedNavigationDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35FEC3F43F1DA2EF5A528DBE /* libPods-LGFAnimatedNavigationDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,6 +120,8 @@
 				182979F120D8F5D0005DB4B7 /* LGFAnimatedNavigationDemoTests */,
 				182979FC20D8F5D0005DB4B7 /* LGFAnimatedNavigationDemoUITests */,
 				182979D720D8F5CE005DB4B7 /* Products */,
+				5C0889BFD905B55C59B8EB97 /* Pods */,
+				F7AA7B5037CE0FBFDCAEBE86 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -121,6 +142,15 @@
 				182979DA20D8F5CE005DB4B7 /* AppDelegate.m */,
 				182979DC20D8F5CE005DB4B7 /* ViewController.h */,
 				182979DD20D8F5CE005DB4B7 /* ViewController.m */,
+				18585E8520E5E4FC0084D5C1 /* TwoViewController.h */,
+				18585E8620E5E4FC0084D5C1 /* TwoViewController.m */,
+				18585E8B20EA21520084D5C1 /* ThreeViewController.h */,
+				18585E8C20EA21520084D5C1 /* ThreeViewController.m */,
+				18585E8820E9C5AD0084D5C1 /* TabBarVC.h */,
+				18585E8920E9C5AD0084D5C1 /* TabBarVC.m */,
+				18585E8220E5E4AA0084D5C1 /* LGFTabBarVC.h */,
+				18585E8320E5E4AA0084D5C1 /* LGFTabBarVC.m */,
+				18585E8E20EA2A4A0084D5C1 /* LGFTabBarVC.storyboard */,
 				182979DF20D8F5CE005DB4B7 /* Main.storyboard */,
 				182979E220D8F5D0005DB4B7 /* Assets.xcassets */,
 				182979E420D8F5D0005DB4B7 /* LaunchScreen.storyboard */,
@@ -166,6 +196,23 @@
 			path = ../LGFTransition;
 			sourceTree = "<group>";
 		};
+		5C0889BFD905B55C59B8EB97 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D23127F1FF92546A08B5C52E /* Pods-LGFAnimatedNavigationDemo.debug.xcconfig */,
+				7BDAEB2FA9C1342F5099363B /* Pods-LGFAnimatedNavigationDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		F7AA7B5037CE0FBFDCAEBE86 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				833ABB1AE0A51CDB8750CA0B /* libPods-LGFAnimatedNavigationDemo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -173,6 +220,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 18297A0220D8F5D0005DB4B7 /* Build configuration list for PBXNativeTarget "LGFAnimatedNavigationDemo" */;
 			buildPhases = (
+				757CBE9F51795CE9BB6941DF /* [CP] Check Pods Manifest.lock */,
 				182979D220D8F5CE005DB4B7 /* Sources */,
 				182979D320D8F5CE005DB4B7 /* Frameworks */,
 				182979D420D8F5CE005DB4B7 /* Resources */,
@@ -272,6 +320,7 @@
 				182979E620D8F5D0005DB4B7 /* LaunchScreen.storyboard in Resources */,
 				182979E320D8F5D0005DB4B7 /* Assets.xcassets in Resources */,
 				182979E120D8F5CE005DB4B7 /* Main.storyboard in Resources */,
+				18585E8F20EA2A4A0084D5C1 /* LGFTabBarVC.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,11 +340,36 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		757CBE9F51795CE9BB6941DF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LGFAnimatedNavigationDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		182979D220D8F5CE005DB4B7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18585E8720E5E4FC0084D5C1 /* TwoViewController.m in Sources */,
+				18585E8A20E9C5AD0084D5C1 /* TabBarVC.m in Sources */,
+				18585E8420E5E4AA0084D5C1 /* LGFTabBarVC.m in Sources */,
+				18585E8D20EA21520084D5C1 /* ThreeViewController.m in Sources */,
 				18297A5720E1CCF5005DB4B7 /* LGFBackButton.m in Sources */,
 				18297A5420E1CCF5005DB4B7 /* UINavigationController+LGFAnimatedTransition.m in Sources */,
 				18297A5620E1CCF5005DB4B7 /* UIViewController+LGFAnimatedTransition.m in Sources */,
@@ -470,6 +544,7 @@
 		};
 		18297A0320D8F5D0005DB4B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D23127F1FF92546A08B5C52E /* Pods-LGFAnimatedNavigationDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -488,6 +563,7 @@
 		};
 		18297A0420D8F5D0005DB4B7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7BDAEB2FA9C1342F5099363B /* Pods-LGFAnimatedNavigationDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

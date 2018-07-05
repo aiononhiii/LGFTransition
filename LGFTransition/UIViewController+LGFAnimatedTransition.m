@@ -63,7 +63,7 @@ NSString *const lgf_IsUseLGFAnimatedTransitionKey = @"lgf_IsUseLGFAnimatedTransi
     if (viewControllerToPresent.modalPresentationStyle == UIModalPresentationFullScreen) {
         viewControllerToPresent.transitioningDelegate = [LGFModalTransition sharedLGFModalTransition];
     }
-    [self lgf_PresentViewController:viewControllerToPresent animated:YES completion:completion];
+    [self lgf_PresentViewController:viewControllerToPresent animated:flag completion:completion];
 }
 
 - (void)lgf_DismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion {
@@ -72,19 +72,36 @@ NSString *const lgf_IsUseLGFAnimatedTransitionKey = @"lgf_IsUseLGFAnimatedTransi
     if (self.modalPresentationStyle == UIModalPresentationFullScreen) {
         self.transitioningDelegate = [LGFModalTransition sharedLGFModalTransition];
     }
-    [self lgf_DismissViewControllerAnimated:YES completion:completion];
+    [self lgf_DismissViewControllerAnimated:flag completion:completion];
 }
 
 - (void)lgf_AnimatedTransitionViewWillAppear:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:YES];
+    if (!self.navigationController.navigationBar.hidden) {
+        self.navigationController.navigationBar.hidden = YES;
+    }
+    if (!self.navigationController.tabBarController.tabBar.hidden) {
+        self.navigationController.tabBarController.tabBar.hidden = YES;
+    }
 }
 
 - (void)lgf_AddPopPan:(lgf_PanType)panType {
     // 添加左侧边缘拖动手势
-    // Add the left UIScreenEdgePanGestureRecognizer
-    UIPanGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(lgf_GestureRecognizer:)];
-    [self.view addGestureRecognizer:recognizer];
+    // Add the left UIScreenEdgePanGestureRecognizer / UIPanGestureRecognizer
     self.lgf_PanType = panType;
+    if (panType == lgf_PopPan) {
+        UIScreenEdgePanGestureRecognizer *recognizer = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(lgf_GestureRecognizer:)];
+        recognizer.edges = UIRectEdgeLeft;
+        recognizer.delegate = self;
+        [self.view addGestureRecognizer:recognizer];
+    } else {
+        UIPanGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(lgf_GestureRecognizer:)];
+        recognizer.delegate = self;
+        [self.view addGestureRecognizer:recognizer];
+    }
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return [gestureRecognizer isKindOfClass:UIScreenEdgePanGestureRecognizer.class];
 }
 
 - (void)lgf_GestureRecognizer:(UIPanGestureRecognizer *)recognizer {
@@ -92,6 +109,7 @@ NSString *const lgf_IsUseLGFAnimatedTransitionKey = @"lgf_IsUseLGFAnimatedTransi
     // Calculate the distance dragged over the view
     CGFloat progress = self.lgf_PanType == lgf_PopPan ? [recognizer translationInView:self.view].x / self.view.bounds.size.width : [recognizer translationInView:self.view].y / self.view.bounds.size.height;
     progress = MIN(1.0, MAX(0.0, progress));
+    NSLog(@"%f", [recognizer translationInView:self.view].x);
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         // 创建并开始一个转场交互
         // Create and start a transition interaction

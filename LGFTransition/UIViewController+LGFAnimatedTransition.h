@@ -54,7 +54,7 @@ typedef NS_ENUM(NSUInteger, lgf_PanType) {
 UIKIT_EXTERN NSString *const lgf_InteractiveTransitionKey;
 UIKIT_EXTERN NSString *const lgf_IsUseLGFAnimatedTransitionKey;
 
-@interface UIViewController (LGFAnimatedTransition) <UIGestureRecognizerDelegate>
+@interface UIViewController (LGFAnimatedTransition) <UIGestureRecognizerDelegate, UIGestureRecognizerDelegate>
 @property (nonatomic, strong) UIPercentDrivenInteractiveTransition *lgf_InteractiveTransition;
 @property (nonatomic, assign) lgf_PanType lgf_PanType;
 #pragma mark - 添加拖动手势 / Add the UIPanGestureRecognizer

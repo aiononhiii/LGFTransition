@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LGFOCTool.h"
 
 @interface ViewController : UIViewController
-
+lgf_SBViewControllerForH;
 @end
 

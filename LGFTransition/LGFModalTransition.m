@@ -41,46 +41,43 @@ lgf_AllocOnlyOnceForM(LGFModalTransition, LGFModalTransition);
     UIView *toView = toVC.view;
     [containerView addSubview:toView];
     
+    // 初始化 半透明黑色遮罩
+    // Initialization Translucent black mask
+    UIView *mask = [[UIView alloc] init];
+    mask.backgroundColor = [UIColor blackColor];
+    mask.frame = [[UIScreen mainScreen] bounds];
+    
     // 判断是 Present 还是 Dismiss 操作
     // Determine if it is a Present or Dismiss operation
     if (self.isPresent) {
+        mask.alpha = 0.0;
+        [fromView addSubview:mask];
         [containerView bringSubviewToFront:toView];
-        toView.frame = CGRectMake(0.0,
-                                  lgf_ScreenHeight,
-                                  lgf_ScreenWidth,
-                                  lgf_ScreenHeight);
+        toView.transform = CGAffineTransformMakeTranslation(0.0, lgf_ScreenHeight);
     } else  {
+        mask.alpha = 0.6;
+        [toView addSubview:mask];
         [containerView bringSubviewToFront:fromView];
-        fromView.layer.shadowColor = [UIColor blackColor].CGColor;
-        fromView.layer.shadowRadius = 15.0;
-        fromView.layer.shadowOpacity = 0.5;
-        toView.frame = CGRectMake(0.0,
-                                  0.0,
-                                  lgf_ScreenWidth,
-                                  lgf_ScreenHeight);
+        toView.transform = CGAffineTransformIdentity;
     }
     
     // 执行自定义转场动画 改变UI
     // Perform custom transition animations Change UI
     [UIView animateWithDuration:[self transitionDuration:transitionContext] delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         if (self.isPresent) {
-            toView.frame = CGRectMake(toView.frame.origin.x,
-                                      0.0,
-                                      toView.frame.size.width,
-                                      toView.frame.size.height);
+            mask.alpha = 0.6;
+            toView.transform = CGAffineTransformIdentity;
         } else {
-            fromView.frame = CGRectMake(fromView.frame.origin.x,
-                                        lgf_ScreenHeight,
-                                        fromView.frame.size.width,
-                                        fromView.frame.size.height);
+            mask.alpha = 0.0;
+            fromView.transform = CGAffineTransformMakeTranslation(0.0, lgf_ScreenHeight);
         }
     } completion:^(BOOL finished) {
         // 设置 transitionContext 通知系统动画执行完毕
         // Set transitionContext to notify system animation completion
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
-        // 删除阴影
-        // Remove shadow
-        fromView.layer.shadowOpacity = 0.0;
+        // 删除遮罩
+        // Remove black mask
+        [mask removeFromSuperview];
         // 判断转场是否取消
         // Determine whether the transition is canceled
         if (![transitionContext transitionWasCancelled]) {

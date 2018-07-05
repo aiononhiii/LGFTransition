@@ -41,60 +41,53 @@ lgf_AllocOnlyOnceForM(LGFShowTransition, LGFShowTransition);
     UIView *toView = toVC.view;
     [containerView addSubview:toView];
     
+    // 初始化 半透明黑色遮罩
+    // Initialization Translucent black mask
+    UIView *mask = [[UIView alloc] init];
+    mask.backgroundColor = [UIColor blackColor];
+    mask.frame = [[UIScreen mainScreen] bounds];
+    
     // 判断是 push 还是 pop 操作
     // Determine if it is a push or pop operation
     if (self.isPush) {
+        mask.alpha = 0.0;
+        [fromView addSubview:mask];
         [containerView bringSubviewToFront:toView];
-        toView.frame = CGRectMake(lgf_ScreenWidth,
-                                  0.0,
-                                  lgf_ScreenWidth,
-                                  lgf_ScreenHeight);
+        toView.transform = CGAffineTransformMakeTranslation(lgf_ScreenWidth, 0);
     } else {
+        mask.alpha = 0.6;
+        [toView addSubview:mask];
         [containerView bringSubviewToFront:fromView];
-        fromView.layer.shadowColor = [UIColor blackColor].CGColor;
-        fromView.layer.shadowRadius = 15.0;
-        fromView.layer.shadowOpacity = 0.5;
-        toView.frame = CGRectMake(-(lgf_ScreenWidth / 2),
-                                  0.0,
-                                  lgf_ScreenWidth,
-                                  lgf_ScreenHeight);
+        toView.transform = CGAffineTransformMakeTranslation(-(lgf_ScreenWidth * 0.3), 0);
     }
-
+    
     // 执行自定义转场动画 改变UI
     // Perform custom transition animations Change UI
     [UIView animateWithDuration:[self transitionDuration:transitionContext] delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         if (self.isPush) {
-            fromView.frame = CGRectMake(-(lgf_ScreenWidth / 2),
-                                        fromView.frame.origin.y,
-                                        lgf_ScreenWidth,
-                                        fromView.frame.size.height);
-            toView.frame = CGRectMake(0.0,
-                                      toView.frame.origin.y,
-                                      lgf_ScreenWidth,
-                                      fromView.frame.size.height);
+            mask.alpha = 0.6;
+            fromView.transform = CGAffineTransformMakeTranslation(-(lgf_ScreenWidth * 0.3), 0);
+            toView.transform = CGAffineTransformIdentity;
         } else {
-            toView.frame = CGRectMake(0.0,
-                                      toView.frame.origin.y,
-                                      lgf_ScreenWidth,
-                                      fromView.frame.size.height);
-            fromView.frame = CGRectMake(lgf_ScreenWidth,
-                                        fromView.frame.origin.y,
-                                        lgf_ScreenWidth,
-                                        fromView.frame.size.height);
+            mask.alpha = 0.0;
+            fromView.transform = CGAffineTransformMakeTranslation(lgf_ScreenWidth, 0);
+            toView.transform = CGAffineTransformIdentity;
         }
     } completion:^(BOOL finished) {
         // 设置 transitionContext 通知系统动画执行完毕
         // Set transitionContext to notify system animation completion
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
-        // 删除阴影
-        // Remove shadow
-        fromView.layer.shadowOpacity = 0.0;
+        // 删除遮罩
+        // Remove black mask
+        [mask removeFromSuperview];
         // 判断转场是否取消
         // Determine whether the transition is canceled
         if (![transitionContext transitionWasCancelled]) {
             self.toVC = toVC;
+            fromView.transform = CGAffineTransformIdentity;
         } else {
             self.toVC = fromVC;
+            toView.transform = CGAffineTransformIdentity;
         }
         // 给 self.toVC 添加手势
         // Add gestures to toVC

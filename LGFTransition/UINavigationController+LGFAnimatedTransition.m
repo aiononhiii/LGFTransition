@@ -37,12 +37,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)lgf_PushViewController:(UIViewController *)viewController animated:(BOOL)animated {
     self.delegate = [LGFShowTransition sharedLGFShowTransition];
-    [self lgf_PushViewController:viewController animated:YES];
+    [self lgf_PushViewController:viewController animated:animated];
 }
 
 - (nullable UIViewController *)lgf_PopViewControllerAnimated:(BOOL)animated {
     self.delegate = [LGFShowTransition sharedLGFShowTransition];
-    return [self lgf_PopViewControllerAnimated:YES];
+    return [self lgf_PopViewControllerAnimated:animated];
 }
 
 @end

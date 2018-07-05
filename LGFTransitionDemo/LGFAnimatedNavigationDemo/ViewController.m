@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "LGFTabBarVC.h"
 
 @interface ViewController ()
 
@@ -14,18 +15,34 @@
 
 @implementation ViewController
 
+lgf_SBViewControllerForM(ViewController, @"Main", nil);
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    [lgf_NCenter addObserver:self selector:@selector(scrollToTop:) name:LGFTabBarDoubleSelectNotification object:nil];
 }
 
+- (void)dealloc {
+    [lgf_NCenter removeObserver:self];
+    NSLog(@"ViewController 已释放");
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc {
-    NSLog(@"ViewController 已释放");
+- (void)scrollToTop:(NSNotification *)notif {
+    NSDictionary *dict = notif.object;
+    if ([dict[@"LGFTabBarSelectIndex"] integerValue] == 0) {
+        [self.view lgf_ShowToastMessage:[NSString stringWithFormat:@"%@ 当前重复点击了, 这里添加滚到顶部代码", dict[@"LGFTabBarSelectIndex"]] completion:^{
+            
+        }];
+    }
 }
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
+}
+
 @end
