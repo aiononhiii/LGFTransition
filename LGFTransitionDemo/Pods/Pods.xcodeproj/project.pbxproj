@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -274,7 +274,7 @@
 		18DC4B476B561033EFA3885C66BC23D2 /* CLLocation+LGFCLLocation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "CLLocation+LGFCLLocation.m"; path = "LGFOCTool/CLLocation+LGFCategory/CLLocation+LGFCLLocation.m"; sourceTree = "<group>"; };
 		1A683A0FDFB269A9E647ACBF5DEB1C8C /* LGFWaterLayout.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LGFWaterLayout.m; path = LGFOCTool/LGFView/LGFWaterLayout/LGFWaterLayout.m; sourceTree = "<group>"; };
 		1C87BFB243545F8E3ABC1EAEBB178646 /* Pods-LGFAnimatedNavigationDemo-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LGFAnimatedNavigationDemo-resources.sh"; sourceTree = "<group>"; };
-		1F090C67432EF2A2051788897BEC7C8C /* libPods-LGFAnimatedNavigationDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-LGFAnimatedNavigationDemo.a"; path = "libPods-LGFAnimatedNavigationDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F090C67432EF2A2051788897BEC7C8C /* libPods-LGFAnimatedNavigationDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LGFAnimatedNavigationDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FDAF37B17B7AA3A80A45C210B9BDCA3 /* LGFNetworkHeader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LGFNetworkHeader.m; path = LGFOCTool/LGFNetworking/LGFNetworkHeader.m; sourceTree = "<group>"; };
 		2008DCBF775135EDE08DA582103E3046 /* NSArray+LGFToJSONString.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSArray+LGFToJSONString.m"; path = "LGFOCTool/NSArray+LGFCategory/NSArray+LGFToJSONString.m"; sourceTree = "<group>"; };
 		213ABFBDE702EC095AD30344CC20022E /* NSString+LGFHash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSString+LGFHash.m"; path = "LGFOCTool/NSString+LGFCategory/NSString+LGFHash.m"; sourceTree = "<group>"; };
@@ -310,13 +310,13 @@
 		48CF5C096C475F53E11C4FD0577785FB /* AFAutoPurgingImageCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFAutoPurgingImageCache.m; path = "UIKit+AFNetworking/AFAutoPurgingImageCache.m"; sourceTree = "<group>"; };
 		4AEBC8D87417DB2B5FF106836D1B8E01 /* AFURLSessionManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLSessionManager.m; path = AFNetworking/AFURLSessionManager.m; sourceTree = "<group>"; };
 		4BBCF6E1F7CE8E7ED5256FC9F830ACE5 /* LGFUploadImage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LGFUploadImage.m; path = LGFOCTool/LGFView/LGFUploadImage/LGFUploadImage.m; sourceTree = "<group>"; };
-		4C4EA3E651D059F3EC0956A5F1C9435D /* libLGFOCTool.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libLGFOCTool.a; path = libLGFOCTool.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C4EA3E651D059F3EC0956A5F1C9435D /* libLGFOCTool.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLGFOCTool.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E16E80263843357B7779235A0DDEDA6 /* NSNumber+LGFNumber.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSNumber+LGFNumber.h"; path = "LGFOCTool/NSNumber+LGFCategory/NSNumber+LGFNumber.h"; sourceTree = "<group>"; };
 		541D045E060E5DA8367AF6F05791AD4E /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Contacts.framework; sourceTree = DEVELOPER_DIR; };
 		5510811EEF848B9058343C3EEB082C23 /* NSDate+LGFDate.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSDate+LGFDate.m"; path = "LGFOCTool/NSDate+LGFCategory/NSDate+LGFDate.m"; sourceTree = "<group>"; };
 		555954A277FC5701AB3A72EBEC7D7CBC /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
 		55BAACB1875F705B49C2DA877D654BC0 /* UILabel+LGFLable.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UILabel+LGFLable.h"; path = "LGFOCTool/New Group1/UILabel+LGFLable.h"; sourceTree = "<group>"; };
-		55D0E463315F80F9AAED6A5DF4D41959 /* libAFNetworking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libAFNetworking.a; path = libAFNetworking.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		55D0E463315F80F9AAED6A5DF4D41959 /* libAFNetworking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAFNetworking.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		56517A4E677143C1B93AF6B75557CDF8 /* UIButton+LGFImagePosition.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIButton+LGFImagePosition.m"; path = "LGFOCTool/UIButton+LGFCategory/UIButton+LGFImagePosition.m"; sourceTree = "<group>"; };
 		56968F2920A5F479D6F6F85D3CFC39A7 /* Pods-LGFAnimatedNavigationDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LGFAnimatedNavigationDemo.release.xcconfig"; sourceTree = "<group>"; };
 		58AADE6C1C731F9B447130B5051FF021 /* NSData+LGFData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSData+LGFData.h"; path = "LGFOCTool/NSData+LGFCategory/NSData+LGFData.h"; sourceTree = "<group>"; };
@@ -375,7 +375,7 @@
 		9088097975D1D1D9958E6A49A7CD0036 /* UIImage+LGFColorImage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+LGFColorImage.h"; path = "LGFOCTool/New Group/UIImage+LGFColorImage.h"; sourceTree = "<group>"; };
 		90F86816A6EF2B8D370664EA0CC9FE7C /* UIView+LGFExtension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+LGFExtension.h"; path = "LGFOCTool/UIView+LGFCategory/UIView+LGFExtension.h"; sourceTree = "<group>"; };
 		9203814DC475BFC6FD2C47AAEB84AAC3 /* UIFont+LGFFont.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIFont+LGFFont.m"; path = "LGFOCTool/UIFont+LGFCategory/UIFont+LGFFont.m"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		93F9CE3FC311E90D9A90E3397F79273A /* NSKeyedUnarchiver+LGFKeyedUnarchiver.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSKeyedUnarchiver+LGFKeyedUnarchiver.m"; path = "LGFOCTool/NSKeyedUnarchiver+LGFCategory/NSKeyedUnarchiver+LGFKeyedUnarchiver.m"; sourceTree = "<group>"; };
 		952D39DCD269BD3C263229A35267EDA1 /* UIButton+LGFImagePosition.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIButton+LGFImagePosition.h"; path = "LGFOCTool/UIButton+LGFCategory/UIButton+LGFImagePosition.h"; sourceTree = "<group>"; };
 		95735D1A3161EEA5C582732ED6D416F1 /* NSObject+LGFRuntime.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSObject+LGFRuntime.h"; path = "LGFOCTool/NSObject+LGFCategory/NSObject+LGFRuntime.h"; sourceTree = "<group>"; };
@@ -626,7 +626,6 @@
 				5A94C62EE549511E61A7F8795D673F4C /* Support Files */,
 				D3E38E9A09BD9C5009C4556D0374563A /* UIKit */,
 			);
-			name = AFNetworking;
 			path = AFNetworking;
 			sourceTree = "<group>";
 		};
@@ -870,7 +869,6 @@
 				F959C9C369B59F1E78D7300550823290 /* UIWindow+LGFTopVC.m */,
 				1026808F0F7EE0189C28FBAE549438C1 /* Support Files */,
 			);
-			name = LGFOCTool;
 			path = LGFOCTool;
 			sourceTree = "<group>";
 		};
@@ -1051,7 +1049,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 0940;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1310,7 +1308,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1352,7 +1350,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				GCC_PREFIX_HEADER = "Target Support Files/AFNetworking/AFNetworking-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PRIVATE_HEADERS_FOLDER_PATH = "";
@@ -1438,7 +1436,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -1455,7 +1453,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				GCC_PREFIX_HEADER = "Target Support Files/AFNetworking/AFNetworking-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PRIVATE_HEADERS_FOLDER_PATH = "";

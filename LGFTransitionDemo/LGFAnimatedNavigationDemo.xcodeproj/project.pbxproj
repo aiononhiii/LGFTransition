@@ -25,7 +25,6 @@
 		18585E8A20E9C5AD0084D5C1 /* TabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18585E8920E9C5AD0084D5C1 /* TabBarVC.m */; };
 		18585E8D20EA21520084D5C1 /* ThreeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18585E8C20EA21520084D5C1 /* ThreeViewController.m */; };
 		18585E8F20EA2A4A0084D5C1 /* LGFTabBarVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18585E8E20EA2A4A0084D5C1 /* LGFTabBarVC.storyboard */; };
-		35FEC3F43F1DA2EF5A528DBE /* libPods-LGFAnimatedNavigationDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 833ABB1AE0A51CDB8750CA0B /* libPods-LGFAnimatedNavigationDemo.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,7 +90,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35FEC3F43F1DA2EF5A528DBE /* libPods-LGFAnimatedNavigationDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,7 +481,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -535,7 +533,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -547,8 +545,9 @@
 			baseConfigurationReference = D23127F1FF92546A08B5C52E /* Pods-LGFAnimatedNavigationDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 96RN4L9K39;
+				DEVELOPMENT_TEAM = HLNNLAB64S;
 				INFOPLIST_FILE = LGFAnimatedNavigationDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -557,6 +556,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = DemoProjectTest.LGFAnimatedNavigationDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -566,8 +566,9 @@
 			baseConfigurationReference = 7BDAEB2FA9C1342F5099363B /* Pods-LGFAnimatedNavigationDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 96RN4L9K39;
+				DEVELOPMENT_TEAM = HLNNLAB64S;
 				INFOPLIST_FILE = LGFAnimatedNavigationDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -576,6 +577,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = DemoProjectTest.LGFAnimatedNavigationDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
