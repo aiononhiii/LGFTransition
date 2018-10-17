@@ -1,1 +1,0 @@
-../../../LGFOCTool/LGFOCTool/New Group3/UIApplication+LGFApplication.h

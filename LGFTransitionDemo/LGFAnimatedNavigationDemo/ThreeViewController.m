@@ -15,11 +15,11 @@
 
 @implementation ThreeViewController
 
-lgf_SBViewControllerForM(ThreeViewController, @"Main", nil);
+lgf_SBViewControllerForM(ThreeViewController, @"Main", @"ViewController");
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [lgf_NCenter addObserver:self selector:@selector(scrollToTop:) name:LGFTabBarDoubleSelectNotification object:nil];
+    [lgf_NCenter addObserver:self selector:@selector(scrollToTop:) name:LGFTabBarDoubleSelect object:nil];
 }
 
 - (void)dealloc {
@@ -29,7 +29,9 @@ lgf_SBViewControllerForM(ThreeViewController, @"Main", nil);
 - (void)scrollToTop:(NSNotification *)notif {
     NSDictionary *dict = notif.object;
     if ([dict[@"LGFTabBarSelectIndex"] integerValue] == 2) {
-        [self.view lgf_ShowToastMessage:[NSString stringWithFormat:@"%@ 当前重复点击了, 这里添加滚到顶部代码", dict[@"LGFTabBarSelectIndex"]] completion:^{}];
+        [self.view lgf_ShowMessage:[NSString stringWithFormat:@"%@ 当前重复点击了, 这里添加滚到顶部代码", dict[@"LGFTabBarSelectIndex"]] animated:YES completion:^{
+            
+        }];
     }
 }
 

@@ -1,0 +1,331 @@
+//
+//  LGFAllSpecialMethod.m
+//  LGFOCTool
+//
+//  Created by apple on 2017/5/2.
+//  Copyright © 2017年 来国锋. All rights reserved.
+//
+
+#import "LGFAllMethod.h"
+#import "LGFOCTool.h"
+#include <arpa/inet.h>
+#include <net/if.h>
+#include <ifaddrs.h>
+#include <net/if_dl.h>
+
+@implementation LGFAllMethod
+
+static CGFloat leftConstant;
+static CGFloat rightConstant;
+static CGFloat topConstant;
+static CGFloat heightConstant;
++ (void)lgf_ToLayoutScreenView:(UIView *)view left:(NSLayoutConstraint *)left right:(NSLayoutConstraint *)right top:(NSLayoutConstraint *)top height:(NSLayoutConstraint *)height {
+    if (CGAffineTransformEqualToTransform(view.transform, CGAffineTransformIdentity)) {
+        leftConstant = left.constant;
+        rightConstant = right.constant;
+        topConstant = top.constant;
+        heightConstant = height.constant;
+        height.constant = lgf_ScreenWidth;
+        left.constant = (lgf_ScreenWidth - lgf_ScreenHeight) / 2;
+        right.constant = -(lgf_ScreenHeight - lgf_ScreenWidth + (lgf_ScreenWidth - lgf_ScreenHeight) / 2);
+        UIView *topView = (UIView *)top.secondItem;
+        top.constant = (lgf_ScreenHeight - lgf_ScreenWidth) / 2 - topView.lgf_y - topView.lgf_height;
+        [UIView animateWithDuration:0.4 animations:^{
+            [view.superview layoutIfNeeded];
+            view.transform = CGAffineTransformRotate(view.transform, M_PI_2);
+        }];
+    }
+}
+
++ (void)lgf_ToLayoutUnScreenView:(UIView *)view left:(NSLayoutConstraint *)left right:(NSLayoutConstraint *)right top:(NSLayoutConstraint *)top height:(NSLayoutConstraint *)height {
+    if (!CGAffineTransformEqualToTransform(view.transform, CGAffineTransformIdentity)) {
+        left.constant = leftConstant;
+        right.constant = rightConstant;
+        top.constant = topConstant;
+        height.constant = heightConstant;
+        [UIView animateWithDuration:0.4 animations:^{
+            view.transform = CGAffineTransformIdentity;
+            [view.superview layoutIfNeeded];
+        } completion:^(BOOL finished) {
+        }];
+    }
+}
+
++ (void)lgf_ToTransformScreenView:(UIView *)view {
+    if (CGAffineTransformEqualToTransform(view.transform, CGAffineTransformIdentity)) {
+        [UIView animateWithDuration:0.5 animations:^{
+            view.transform = CGAffineTransformTranslate(view.transform, 0, (lgf_ScreenHeight - lgf_ScreenWidth) / 2 +(view.lgf_width - 200) / 2 - view.lgf_y);
+            view.transform = CGAffineTransformScale(view.transform, view.lgf_width / 200, lgf_ScreenHeight / lgf_ScreenWidth);
+            view.transform = CGAffineTransformRotate(view.transform, M_PI_2);
+        }];
+    }
+}
+
++ (void)lgf_ToTransformUnScreenView:(UIView *)view {
+    if (!CGAffineTransformEqualToTransform(view.transform, CGAffineTransformIdentity)) {
+        [UIView animateWithDuration:0.5 animations:^{
+            view.transform = CGAffineTransformIdentity;
+        } completion:^(BOOL finished) {
+        }];
+    }
+}
+
++ (UIImage *)lgf_GetCodeImageWithUrl:(NSString *)urlString imgWidth:(float)imgWidth {
+    //创建过滤器
+    CIFilter *filter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
+    //过滤器恢复默认
+    [filter setDefaults];
+    //给过滤器添加数据
+    NSString *string = urlString;
+    //将NSString格式转化成NSData格式
+    NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+    [filter setValue:data forKeyPath:@"inputMessage"];
+    //获取二维码过滤器生成的二维码
+    CIImage *image = [filter outputImage];
+    //此步骤将二维码生成的图片清晰化
+    CGRect extent = CGRectIntegral(image.extent);
+    CGFloat scale = MIN(imgWidth/CGRectGetWidth(extent), imgWidth/CGRectGetHeight(extent));
+    // 1.创建bitmap;
+    size_t width = CGRectGetWidth(extent) * scale;
+    size_t height = CGRectGetHeight(extent) * scale;
+    CGColorSpaceRef cs = CGColorSpaceCreateDeviceGray();
+    CGContextRef bitmapRef = CGBitmapContextCreate(nil, width, height, 8, 0, cs, (CGBitmapInfo)kCGImageAlphaNone);
+    CIContext *context = [CIContext contextWithOptions:nil];
+    CGImageRef bitmapImage = [context createCGImage:image fromRect:extent];
+    CGContextSetInterpolationQuality(bitmapRef, kCGInterpolationNone);
+    CGContextScaleCTM(bitmapRef, scale, scale);
+    CGContextDrawImage(bitmapRef, extent, bitmapImage);
+    // 2.保存bitmap到图片
+    CGImageRef scaledImage = CGBitmapContextCreateImage(bitmapRef);
+    CGContextRelease(bitmapRef);
+    CGImageRelease(bitmapImage);
+    //将获取到的二维码添加到imageview上
+    return [UIImage imageWithCGImage:scaledImage];
+}
+
++ (int)lgf_GetRandomNumber:(int)from to:(int)to {
+    return (int)(from + (arc4random() % (to - from + 1)));
+}
+
++ (BOOL)lgf_IsGoodNetSpeed {
+    CGFloat bity = [LGFAllMethod lgf_GetInterfaceBytes];
+    CGFloat speed = bity/1000;
+    if (speed < 100) {
+        NSString *string = @"您当前网速低于【100kb/s】,暂时不能开启直播；请先设置好您的网络要求";
+        [lgf_Application.keyWindow lgf_ShowMessage:string animated:YES completion:nil];
+        return NO;
+    }
+    return YES;
+}
+
++ (long long)lgf_GetInterfaceBytes {
+    struct ifaddrs *ifa_list = 0, *ifa;
+    if (getifaddrs(&ifa_list) == -1) {
+        return 0;
+    }
+    uint32_t iBytes = 0;
+    uint32_t oBytes = 0;
+    for (ifa = ifa_list; ifa; ifa = ifa->ifa_next) {
+        if (AF_LINK != ifa->ifa_addr->sa_family)
+            continue;
+        if (!(ifa->ifa_flags & IFF_UP) && !(ifa->ifa_flags & IFF_RUNNING))
+            continue;
+        if (ifa->ifa_data == 0)
+            continue;
+        /* Not a loopback device. */
+        if (strncmp(ifa->ifa_name, "lo", 2)) {
+            struct if_data *if_data = (struct if_data *)ifa->ifa_data;
+            iBytes += if_data->ifi_ibytes;
+            oBytes += if_data->ifi_obytes;
+        }
+    }
+    freeifaddrs(ifa_list);
+    NSLog(@"\n[getInterfaceBytes-Total]%d,%d",iBytes,oBytes);
+    return iBytes + oBytes;
+}
+
++ (void)lgf_ScrollHideForTopView:(UIView *)topView newHeight:(CGFloat)newHeight hideHeight:(CGFloat)hideHeight scrollView:(UIScrollView *)scrollView animateDuration:(NSTimeInterval)animateDuration {
+    CGPoint translation = [scrollView.panGestureRecognizer translationInView:scrollView.superview];
+    [UIView animateWithDuration:animateDuration animations:^{
+        if (translation.y > 0) {
+            if (topView.transform.ty == -hideHeight) {
+                topView.transform = CGAffineTransformIdentity;
+            }
+        } else if (translation.y < 0) {
+            if ((scrollView.contentOffset.y + newHeight) > hideHeight) {
+                if (topView.transform.ty == 0) {
+                    topView.transform = CGAffineTransformMakeTranslation(0, -hideHeight);
+                }
+            } else {
+                if (topView.transform.ty == -hideHeight) {
+                    topView.transform = CGAffineTransformIdentity;
+                }
+            }
+        }
+    }];
+}
+
++ (void)SKU:(NSMutableArray *)skuArr result:(NSMutableArray *)result data:(NSArray *)data curr:(int)currIndex getSKUArray:(void(^)(NSMutableArray *array))getSKUArray {
+    if (currIndex == data.count) {
+        [skuArr addObject:[result mutableCopy]];
+        __block NSInteger all = 1;
+        [data enumerateObjectsUsingBlock:^(NSArray *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            all = all * (obj.count == 0 ? 1 : obj.count);
+        }];
+        if (skuArr.count == all) {
+            getSKUArray(skuArr);
+            return;
+        }
+        [result removeLastObject];
+    } else {
+        NSArray* array = [data objectAtIndex:currIndex];
+        for (int i = 0; i < array.count; ++i) {
+            [result addObject:[array objectAtIndex:i][@"name"]];
+            [self SKU:skuArr result:result data:data curr:currIndex+1 getSKUArray:getSKUArray];
+            if ((i+1 == array.count) && (currIndex-1>=0)) {
+                [result removeObjectAtIndex:currIndex-1];
+            }
+        }
+    }
+}
+
+static UICollectionViewCell *lgf_MoveCell;
+
++ (void)lgf_SortCellWithGesture:(UILongPressGestureRecognizer *)sender collectionView:(UICollectionView *)collectionView fixedHorizontal:(BOOL)fixedHorizontal fixedVertical:(BOOL)fixedVertical {
+    CGPoint point = [sender locationInView:collectionView];
+    NSIndexPath *indexPath;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunguarded-availability"
+    switch (sender.state) {
+        case UIGestureRecognizerStateBegan:
+            indexPath = [collectionView indexPathForItemAtPoint:point];
+            lgf_MoveCell = [collectionView cellForItemAtIndexPath:indexPath];
+            lgf_MoveCell.alpha = 0.7;
+            for (UIView *view in lgf_MoveCell.subviews) {
+                view.alpha = 0.7;
+            }
+            if (!indexPath) { break; }
+            [collectionView beginInteractiveMovementForItemAtIndexPath:indexPath];
+            break;
+        case UIGestureRecognizerStateChanged:
+            [collectionView updateInteractiveMovementTargetPosition:CGPointMake(fixedHorizontal ? MIN(MAX((lgf_MoveCell.lgf_width / 2), point.x), collectionView.contentSize.width - (lgf_MoveCell.lgf_width / 2)) : point.x, fixedVertical ? MIN(MAX((lgf_MoveCell.lgf_height / 2), point.y), collectionView.contentSize.height - (lgf_MoveCell.lgf_height / 2)) : point.y)];
+            break;
+        case UIGestureRecognizerStateEnded:
+            lgf_MoveCell.alpha = 1.0;
+            for (UIView *view in lgf_MoveCell.subviews) {
+                view.alpha = 1.0;
+            }
+            [collectionView endInteractiveMovement];
+            break;
+        default:
+            lgf_MoveCell.alpha = 1.0;
+            for (UIView *view in lgf_MoveCell.subviews) {
+                view.alpha = 1.0;
+            }
+            [collectionView cancelInteractiveMovement];
+            break;
+    }
+    #pragma clang diagnostic pop
+}
+
+#pragma mark - 根据PNG图片url获取PNG图片尺寸
++ (CGSize)lgf_GetPNGImageSizeWithUrl:(NSURL *)url {
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    [request setValue:@"bytes=16-23" forHTTPHeaderField:@"Range"];
+    NSData* data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    if (data.length == 8) {
+        int w1 = 0, w2 = 0, w3 = 0, w4 = 0;
+        [data getBytes:&w1 range:NSMakeRange(0, 1)];
+        [data getBytes:&w2 range:NSMakeRange(1, 1)];
+        [data getBytes:&w3 range:NSMakeRange(2, 1)];
+        [data getBytes:&w4 range:NSMakeRange(3, 1)];
+        int w = (w1 << 24) + (w2 << 16) + (w3 << 8) + w4;
+        int h1 = 0, h2 = 0, h3 = 0, h4 = 0;
+        [data getBytes:&h1 range:NSMakeRange(4, 1)];
+        [data getBytes:&h2 range:NSMakeRange(5, 1)];
+        [data getBytes:&h3 range:NSMakeRange(6, 1)];
+        [data getBytes:&h4 range:NSMakeRange(7, 1)];
+        int h = (h1 << 24) + (h2 << 16) + (h3 << 8) + h4;
+        return CGSizeMake(w, h);
+    }
+    return CGSizeZero;
+}
+
+#pragma mark - 根据GIF图片url获取GIF图片尺寸
++ (CGSize)lgf_GetGIFImageSizeWithUrl:(NSURL *)url {
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    [request setValue:@"bytes=6-9" forHTTPHeaderField:@"Range"];
+    NSData* data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    if(data.length == 4)
+    {
+        short w1 = 0, w2 = 0;
+        [data getBytes:&w1 range:NSMakeRange(0, 1)];
+        [data getBytes:&w2 range:NSMakeRange(1, 1)];
+        short w = w1 + (w2 << 8);
+        short h1 = 0, h2 = 0;
+        [data getBytes:&h1 range:NSMakeRange(2, 1)];
+        [data getBytes:&h2 range:NSMakeRange(3, 1)];
+        short h = h1 + (h2 << 8);
+        return CGSizeMake(w, h);
+    }
+    return CGSizeZero;
+}
+
+#pragma mark - 根据JPG图片url获取JPG图片尺寸
++ (CGSize)lgf_GetJPGImageSizeWithUrl:(NSURL *)url {
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    [request setValue:@"bytes=0-209" forHTTPHeaderField:@"Range"];
+    NSData* data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    if ([data length] <= 0x58) {
+        return CGSizeZero;
+    }
+    if ([data length] < 210) {// 肯定只有一个DQT字段
+        short w1 = 0, w2 = 0;
+        [data getBytes:&w1 range:NSMakeRange(0x60, 0x1)];
+        [data getBytes:&w2 range:NSMakeRange(0x61, 0x1)];
+        short w = (w1 << 8) + w2;
+        short h1 = 0, h2 = 0;
+        [data getBytes:&h1 range:NSMakeRange(0x5e, 0x1)];
+        [data getBytes:&h2 range:NSMakeRange(0x5f, 0x1)];
+        short h = (h1 << 8) + h2;
+        return CGSizeMake(w, h);
+    } else {
+        short word = 0x0;
+        [data getBytes:&word range:NSMakeRange(0x15, 0x1)];
+        if (word == 0xdb) {
+            [data getBytes:&word range:NSMakeRange(0x5a, 0x1)];
+            if (word == 0xdb) {// 两个DQT字段
+                short w1 = 0, w2 = 0;
+                [data getBytes:&w1 range:NSMakeRange(0xa5, 0x1)];
+                [data getBytes:&w2 range:NSMakeRange(0xa6, 0x1)];
+                short w = (w1 << 8) + w2;
+                short h1 = 0, h2 = 0;
+                [data getBytes:&h1 range:NSMakeRange(0xa3, 0x1)];
+                [data getBytes:&h2 range:NSMakeRange(0xa4, 0x1)];
+                short h = (h1 << 8) + h2;
+                return CGSizeMake(w, h);
+            } else {// 一个DQT字段
+                short w1 = 0, w2 = 0;
+                [data getBytes:&w1 range:NSMakeRange(0x60, 0x1)];
+                [data getBytes:&w2 range:NSMakeRange(0x61, 0x1)];
+                short w = (w1 << 8) + w2;
+                short h1 = 0, h2 = 0;
+                [data getBytes:&h1 range:NSMakeRange(0x5e, 0x1)];
+                [data getBytes:&h2 range:NSMakeRange(0x5f, 0x1)];
+                short h = (h1 << 8) + h2;
+                return CGSizeMake(w, h);
+            }
+        } else {
+            return CGSizeZero;
+        }
+    }
+}
+
+#pragma mark - 返回可用系统内存容量
++ (CGFloat)lgf_GetDiskFreeSize {
+    NSDictionary *systemAttributes = [[NSFileManager defaultManager] attributesOfFileSystemForPath:NSHomeDirectory() error:nil];
+    CGFloat diskFreeSize = [[systemAttributes objectForKey:@"NSFileSystemFreeSize"] floatValue];
+    return diskFreeSize;
+}
+
+@end

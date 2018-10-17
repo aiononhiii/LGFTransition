@@ -14,21 +14,67 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - LGFOCTool (1.2.1):
-    - AFNetworking
+  - FLAnimatedImage (1.0.12)
+  - MJRefresh (3.1.15.7)
+  - SDWebImage (4.4.1):
+    - SDWebImage/Core (= 4.4.1)
+  - SDWebImage/Core (4.4.1)
+  - YYAsyncLayer (1.0)
+  - YYCache (1.0.4)
+  - YYCategories (1.0.4):
+    - YYCategories/no-arc (= 1.0.4)
+  - YYCategories/no-arc (1.0.4)
+  - YYImage (1.0.4):
+    - YYImage/Core (= 1.0.4)
+  - YYImage/Core (1.0.4)
+  - YYKeyboardManager (1.0.1)
+  - YYModel (1.0.4)
+  - YYText (1.0.7)
+  - YYWebImage (1.0.5):
+    - YYCache
+    - YYImage
 
 DEPENDENCIES:
-  - LGFOCTool
+  - AFNetworking
+  - FLAnimatedImage (~> 1.0)
+  - MJRefresh
+  - SDWebImage (= 4.4.1)
+  - YYAsyncLayer
+  - YYCategories
+  - YYKeyboardManager
+  - YYModel
+  - YYText
+  - YYWebImage
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
-    - LGFOCTool
+    - FLAnimatedImage
+    - MJRefresh
+    - SDWebImage
+    - YYAsyncLayer
+    - YYCache
+    - YYCategories
+    - YYImage
+    - YYKeyboardManager
+    - YYModel
+    - YYText
+    - YYWebImage
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  LGFOCTool: 0f370a5a379a1a603d8fdd44cda22206f9709436
+  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
+  MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
+  SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4
+  YYAsyncLayer: df6b01ebc695c5f6b4c15dd5c23fa3e081eb25c0
+  YYCache: 8105b6638f5e849296c71f331ff83891a4942952
+  YYCategories: 6bcd4314c6661a561410dce4a793379ebd306abd
+  YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
+  YYKeyboardManager: ff53d2e80d1808567a7f004028bd200d9469a89f
+  YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
+  YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
+  YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: c9c635e32915fd6bc53cfcfd27017b3ed9c2b085
+PODFILE CHECKSUM: 4dca30e688bbb0fd2fce2d611654a3bf162f718f
 
 COCOAPODS: 1.5.3

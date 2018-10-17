@@ -14,7 +14,7 @@
 
 @implementation TwoViewController
 
-lgf_SBViewControllerForM(TwoViewController, @"Main", nil);
+lgf_SBViewControllerForM(TwoViewController, @"Main", @"ViewController");
 
 - (void)viewDidLoad {
     [super viewDidLoad];

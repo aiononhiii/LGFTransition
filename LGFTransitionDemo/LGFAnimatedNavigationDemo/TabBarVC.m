@@ -39,7 +39,6 @@
     _tabvc.lgf_SelectBarItemColor = [UIColor redColor];
     _tabvc.lgf_UnSelectBarItemColor = [UIColor darkGrayColor];
     _tabvc.lgf_DefultSelectIndex = 4;
-    _tabvc.lgf_ShowTopShadow = YES;
     [_tabvc lgf_TabBarVCShowInView:self];
     
     UIButton *centerBtn = [_tabvc lgf_TabBarShowCenterBtnWithTop:35 size:CGSizeMake(60, 60)];
