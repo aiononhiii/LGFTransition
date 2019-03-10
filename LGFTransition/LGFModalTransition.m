@@ -11,7 +11,7 @@
 @interface LGFModalTransition()
 // Push 过去的 ViewController
 // Push ViewController
-@property(nonatomic, strong) UIViewController *toVC;
+@property(nonatomic, weak) UIViewController *toVC;
 // 是否是 Present
 @property (nonatomic, assign) BOOL isPresent;
 @end
@@ -33,7 +33,6 @@ lgf_AllocOnlyOnceForM(LGFModalTransition, LGFModalTransition);
     // Present from ViewController
     UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     UIView *fromView = fromVC.view;
-    [containerView addSubview:fromView];
     
     // Present 后的 ViewController
     // Present to ViewController
@@ -72,22 +71,25 @@ lgf_AllocOnlyOnceForM(LGFModalTransition, LGFModalTransition);
             fromView.transform = CGAffineTransformMakeTranslation(0.0, lgf_ScreenHeight);
         }
     } completion:^(BOOL finished) {
-        // 设置 transitionContext 通知系统动画执行完毕
-        // Set transitionContext to notify system animation completion
-        [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
+        BOOL cancelled = [transitionContext transitionWasCancelled];
         // 删除遮罩
         // Remove black mask
         [mask removeFromSuperview];
         // 判断转场是否取消
         // Determine whether the transition is canceled
-        if (![transitionContext transitionWasCancelled]) {
+        if (!cancelled) {
+            fromView.transform = CGAffineTransformIdentity;
             self.toVC = toVC;
+            // 给 self.toVC 添加手势
+            // Add gestures to toVC
+            [self.toVC lgf_AddPopPan:lgf_DismissPan];
         } else {
-            self.toVC = fromVC;
+            toView.transform = CGAffineTransformIdentity;
+            [toView removeFromSuperview];
         }
-        // 给 self.toVC 添加手势
-        // Add gestures to toVC
-        [self.toVC lgf_AddPopPan:lgf_DismissPan];
+        // 设置 transitionContext 通知系统动画执行完毕
+        // Set transitionContext to notify system animation completion
+        [transitionContext completeTransition:!cancelled];
     }];
 }
 

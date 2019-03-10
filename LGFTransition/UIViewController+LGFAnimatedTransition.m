@@ -12,10 +12,12 @@
 
 NSString *const lgf_InteractiveTransitionKey = @"lgf_InteractiveTransitionKey";
 NSString *const lgf_IsUseLGFAnimatedTransitionKey = @"lgf_IsUseLGFAnimatedTransitionKey";
+NSString *const lgf_IsShowNaviVCKey = @"lgf_IsShowNaviVCKey";
 
 @implementation UIViewController (LGFAnimatedTransition)
 @dynamic lgf_InteractiveTransition;
 @dynamic lgf_PanType;
+@dynamic lgf_IsShowNaviVC;
 
 - (void)setLgf_InteractiveTransition:(UIPercentDrivenInteractiveTransition *)lgf_InteractiveTransition {
     objc_setAssociatedObject(self,
@@ -41,6 +43,14 @@ NSString *const lgf_IsUseLGFAnimatedTransitionKey = @"lgf_IsUseLGFAnimatedTransi
                                      &lgf_IsUseLGFAnimatedTransitionKey) integerValue];
 }
 
+- (void)setLgf_IsShowNaviVC:(BOOL)lgf_IsShowNaviVC {
+    objc_setAssociatedObject(self, &lgf_IsShowNaviVCKey, @(lgf_IsShowNaviVC), OBJC_ASSOCIATION_ASSIGN);
+}
+
+- (BOOL)lgf_IsShowNaviVC {
+    return [objc_getAssociatedObject(self, &lgf_IsShowNaviVCKey) boolValue];
+}
+
 + (void)lgf_AnimatedTransitionModalDuration:(NSTimeInterval)modalDuration {
     if (modalDuration <= 0) {
         // 默认 0.6 / defult 0.6
@@ -60,28 +70,32 @@ NSString *const lgf_IsUseLGFAnimatedTransitionKey = @"lgf_IsUseLGFAnimatedTransi
 - (void)lgf_PresentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^)(void))completion {
     // 确保 modalPresentationStyle 是 UIModalPresentationFullScreen 才使用 LGFModalTransition 自定义动画, 使其不影响系统其他的 Present, 比如 UIAlertViewController
     // Make sure modalPresentationStyle is UIModalPresentationFullScreen to use LGFModalTransition custom animation so that it does not affect other Present of the system, such as UIAlertViewController
-    if (viewControllerToPresent.modalPresentationStyle == UIModalPresentationFullScreen) {
+    if (viewControllerToPresent.modalPresentationStyle == UIModalPresentationFullScreen && flag) {
         viewControllerToPresent.transitioningDelegate = [LGFModalTransition sharedLGFModalTransition];
     }
-    [self lgf_PresentViewController:viewControllerToPresent animated:YES completion:completion];
+    [self lgf_PresentViewController:viewControllerToPresent animated:flag completion:completion];
 }
 
 - (void)lgf_DismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion {
     // 确保是 UIModalPresentationFullScreen 才使用这个自定义动画，使其不影响系统其他的 Dismiss 比如 UIAlertViewController
     // Make sure modalPresentationStyle is UIModalPresentationFullScreen to use LGFModalTransition custom animation so that it does not affect other Dismiss of the system, such as UIAlertViewController
-    if (self.modalPresentationStyle == UIModalPresentationFullScreen) {
+    if (self.modalPresentationStyle == UIModalPresentationFullScreen && flag) {
         self.transitioningDelegate = [LGFModalTransition sharedLGFModalTransition];
     }
-    [self lgf_DismissViewControllerAnimated:YES completion:completion];
+    [self lgf_DismissViewControllerAnimated:flag completion:completion];
 }
 
 - (void)lgf_AnimatedTransitionViewWillAppear:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:YES];
+    [self.navigationController setNavigationBarHidden:!self.lgf_IsShowNaviVC];
+    [self lgf_AnimatedTransitionViewWillAppear:animated];
 }
 
 - (void)lgf_AddPopPan:(lgf_PanType)panType {
     // 添加左侧边缘拖动手势
     // Add the left UIScreenEdgePanGestureRecognizer
+    [self.view.gestureRecognizers enumerateObjectsUsingBlock:^(__kindof UIGestureRecognizer * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [self.view removeGestureRecognizer:obj];
+    }];
     UIScreenEdgePanGestureRecognizer *recognizer = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(lgf_ScreenEdgePanGestureRecognizer:)];
     recognizer.edges = UIRectEdgeLeft;
     [self.view addGestureRecognizer:recognizer];
@@ -91,7 +105,7 @@ NSString *const lgf_IsUseLGFAnimatedTransitionKey = @"lgf_IsUseLGFAnimatedTransi
 - (void)lgf_ScreenEdgePanGestureRecognizer:(UIScreenEdgePanGestureRecognizer *)recognizer {
     // 计算拖过视图的距离
     // Calculate the distance dragged over the view
-    CGFloat progress = [recognizer translationInView:self.view].x / self.view.bounds.size.width;
+    CGFloat progress = [recognizer translationInView:[UIApplication sharedApplication].keyWindow].x / lgf_ScreenWidth;
     progress = MIN(1.0, MAX(0.0, progress));
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         // 创建并开始一个转场交互

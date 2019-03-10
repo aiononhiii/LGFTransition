@@ -11,7 +11,7 @@
 @interface LGFShowTransition()
 // Push 过去的 ViewController
 // Push ViewController
-@property(nonatomic, strong) UIViewController *toVC;
+@property(nonatomic, weak) UIViewController *toVC;
 // 是否是 Push
 @property (nonatomic, assign) BOOL isPush;
 @end
@@ -28,12 +28,11 @@ lgf_AllocOnlyOnceForM(LGFShowTransition, LGFShowTransition);
     // 转场过渡的容器
     // Transition container
     UIView *containerView = [transitionContext containerView];
-
+    
     // Push 前的 ViewController
     // Push from ViewController
     UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     UIView *fromView = fromVC.view;
-    [containerView addSubview:fromView];
     
     // Push 后的 ViewController
     // Push to ViewController
@@ -59,6 +58,7 @@ lgf_AllocOnlyOnceForM(LGFShowTransition, LGFShowTransition);
         [toView addSubview:mask];
         [containerView bringSubviewToFront:fromView];
         toView.transform = CGAffineTransformMakeTranslation(-(lgf_ScreenWidth * 0.3), 0);
+        toView.transform = CGAffineTransformScale(toView.transform, 0.95, 0.95);
     }
     
     // 执行自定义转场动画 改变UI
@@ -67,6 +67,7 @@ lgf_AllocOnlyOnceForM(LGFShowTransition, LGFShowTransition);
         if (self.isPush) {
             mask.alpha = 0.6;
             fromView.transform = CGAffineTransformMakeTranslation(-(lgf_ScreenWidth * 0.3), 0);
+            fromView.transform = CGAffineTransformScale(fromView.transform, 0.95, 0.95);
             toView.transform = CGAffineTransformIdentity;
         } else {
             mask.alpha = 0.0;
@@ -74,24 +75,25 @@ lgf_AllocOnlyOnceForM(LGFShowTransition, LGFShowTransition);
             toView.transform = CGAffineTransformIdentity;
         }
     } completion:^(BOOL finished) {
-        // 设置 transitionContext 通知系统动画执行完毕
-        // Set transitionContext to notify system animation completion
-        [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
+        BOOL cancelled = [transitionContext transitionWasCancelled];
         // 删除遮罩
         // Remove black mask
         [mask removeFromSuperview];
         // 判断转场是否取消
         // Determine whether the transition is canceled
-        if (![transitionContext transitionWasCancelled]) {
-            self.toVC = toVC;
+        if (!cancelled) {
             fromView.transform = CGAffineTransformIdentity;
+            self.toVC = toVC;
+            // 给 self.toVC 添加手势
+            // Add gestures to toVC
+            [self.toVC lgf_AddPopPan:lgf_PopPan];
         } else {
-            self.toVC = fromVC;
             toView.transform = CGAffineTransformIdentity;
+            [toView removeFromSuperview];
         }
-        // 给 self.toVC 添加手势
-        // Add gestures to toVC
-        [self.toVC lgf_AddPopPan:lgf_PopPan];
+        // 设置 transitionContext 通知系统动画执行完毕
+        // Set transitionContext to notify system animation completion
+        [transitionContext completeTransition:!cancelled];
     }];
 }
 
