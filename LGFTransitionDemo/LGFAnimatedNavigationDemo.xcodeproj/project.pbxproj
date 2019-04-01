@@ -147,9 +147,9 @@
 		182979D820D8F5CE005DB4B7 /* LGFAnimatedNavigationDemo */ = {
 			isa = PBXGroup;
 			children = (
+				183EF46422522F010057A9B6 /* Other */,
 				183EF4492251B5D10057A9B6 /* LGFTool */,
 				183EF4372251AC210057A9B6 /* VC */,
-				183EF4382251AC2D0057A9B6 /* Other */,
 			);
 			path = LGFAnimatedNavigationDemo;
 			sourceTree = "<group>";
@@ -175,10 +175,10 @@
 		18297A4820E1CCF5005DB4B7 /* LGFTransition */ = {
 			isa = PBXGroup;
 			children = (
+				183EF46322522ED40057A9B6 /* LGFDefine */,
 				183EF30022504AA50057A9B6 /* LGFTransition */,
 				183EF2F422504A0D0057A9B6 /* LGFNavigationBar */,
 				183EF2FA22504A390057A9B6 /* LGFTabBar */,
-				183EF4332251ABA20057A9B6 /* LGFTransition.h */,
 			);
 			name = LGFTransition;
 			path = ../LGFTransition;
@@ -236,7 +236,24 @@
 			path = VC;
 			sourceTree = "<group>";
 		};
-		183EF4382251AC2D0057A9B6 /* Other */ = {
+		183EF4492251B5D10057A9B6 /* LGFTool */ = {
+			isa = PBXGroup;
+			children = (
+				183EF44A2251B5E60057A9B6 /* LGFTool.h */,
+				183EF44B2251B5E60057A9B6 /* LGFTool.m */,
+			);
+			path = LGFTool;
+			sourceTree = "<group>";
+		};
+		183EF46322522ED40057A9B6 /* LGFDefine */ = {
+			isa = PBXGroup;
+			children = (
+				183EF4332251ABA20057A9B6 /* LGFTransition.h */,
+			);
+			path = LGFDefine;
+			sourceTree = "<group>";
+		};
+		183EF46422522F010057A9B6 /* Other */ = {
 			isa = PBXGroup;
 			children = (
 				182979D920D8F5CE005DB4B7 /* AppDelegate.h */,
@@ -247,16 +264,8 @@
 				182979E720D8F5D0005DB4B7 /* Info.plist */,
 				182979E820D8F5D0005DB4B7 /* main.m */,
 			);
-			path = Other;
-			sourceTree = "<group>";
-		};
-		183EF4492251B5D10057A9B6 /* LGFTool */ = {
-			isa = PBXGroup;
-			children = (
-				183EF44A2251B5E60057A9B6 /* LGFTool.h */,
-				183EF44B2251B5E60057A9B6 /* LGFTool.m */,
-			);
-			path = LGFTool;
+			name = Other;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		5C0889BFD905B55C59B8EB97 /* Pods */ = {
@@ -661,7 +670,7 @@
 					"\"${PODS_ROOT}/Headers/Public/YYText\"",
 					"\"${PODS_ROOT}/Headers/Public/YYWebImage\"",
 				);
-				INFOPLIST_FILE = LGFAnimatedNavigationDemo/Other/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/LGFAnimatedNavigationDemo/New Group/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -698,7 +707,7 @@
 					"\"${PODS_ROOT}/Headers/Public/YYText\"",
 					"\"${PODS_ROOT}/Headers/Public/YYWebImage\"",
 				);
-				INFOPLIST_FILE = LGFAnimatedNavigationDemo/Other/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/LGFAnimatedNavigationDemo/New Group/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
