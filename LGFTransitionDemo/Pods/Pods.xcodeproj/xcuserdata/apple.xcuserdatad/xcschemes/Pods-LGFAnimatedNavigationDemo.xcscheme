@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0478633426D87218A08B371BCD2D3C07"
+               BlueprintIdentifier = "23CFEE9D6A2D71F4358B8F8362A4EE4E"
+               BuildableName = "libPods-LGFAnimatedNavigationDemo.a"
                BlueprintName = "Pods-LGFAnimatedNavigationDemo"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "libPods-LGFAnimatedNavigationDemo.a">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
