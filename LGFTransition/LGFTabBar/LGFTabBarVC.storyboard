@@ -163,6 +163,7 @@
                         <outlet property="lgf_TabBarBackImageView" destination="mJa-Ip-CuE" id="rGJ-3J-mzl"/>
                         <outlet property="lgf_TabBarBackView" destination="vEx-MS-s4O" id="0Vb-kV-23z"/>
                         <outlet property="lgf_TabBarBackViewHeight" destination="mMz-yE-ueO" id="pbS-7S-Brq"/>
+                        <outlet property="lgf_VisualView" destination="Jbg-du-Y6a" id="6xG-V5-wYr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CvG-FP-viJ" userLabel="First Responder" sceneMemberID="firstResponder"/>

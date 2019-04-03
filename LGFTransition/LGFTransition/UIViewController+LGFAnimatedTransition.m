@@ -101,6 +101,7 @@ NSString *const lgf_IsShowNaviVCKey = @"lgf_IsShowNaviVCKey";
     [self.view addGestureRecognizer:recognizer];
     self.lgf_PanType = panType;
     
+    // 用于解决子控制器横向 scrollview 的手势冲突，将该 scrollview 的 tag 值设为 333333
     [self.view.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([view isKindOfClass:[UICollectionView class]]) {
             if (view.tag == 333333) {
@@ -115,6 +116,7 @@ NSString *const lgf_IsShowNaviVCKey = @"lgf_IsShowNaviVCKey";
 }
 
 - (void)requireG:(UIViewController *)vc block:(void(^)(UIPanGestureRecognizer *pan))block {
+    // 用于解决子控制器横向 scrollview 的手势冲突，将该 scrollview 的 tag 值设为 333333
     [vc.childViewControllers enumerateObjectsUsingBlock:^(__kindof UIViewController * _Nonnull cvc, NSUInteger idx, BOOL * _Nonnull stop) {
         [cvc.view.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
             if ([view isKindOfClass:[UICollectionView class]]) {

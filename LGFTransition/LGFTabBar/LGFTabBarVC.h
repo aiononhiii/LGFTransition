@@ -28,6 +28,8 @@ typedef void(^lgf_CenterBtnSelect)(UIButton *sender);
 @property (weak, nonatomic) IBOutlet UIView *lgf_TabBarBackView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *lgf_TabBarBackViewHeight;
 @property (weak, nonatomic) IBOutlet UIImageView *lgf_TabBarBackImageView;
+// 要修改毛玻璃的显示效果改变这个 view 的背景色透明度就行
+@property (weak, nonatomic) IBOutlet UIView *lgf_VisualView;
 @property (assign, nonatomic) BOOL lgf_IsHaveCenterButton;
 @property (copy, nonatomic) lgf_ShouldSelectItemAtIndexPath shouldSelectItemAtIndexPath;
 @property (copy, nonatomic) lgf_SelectVC selectVC;
