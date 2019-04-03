@@ -762,7 +762,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 96RN4L9K39;
+				DEVELOPMENT_TEAM = HLNNLAB64S;
 				INFOPLIST_FILE = LGFAnimatedNavigationDemoUITests/Other/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -780,7 +780,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 96RN4L9K39;
+				DEVELOPMENT_TEAM = HLNNLAB64S;
 				INFOPLIST_FILE = LGFAnimatedNavigationDemoUITests/Other/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

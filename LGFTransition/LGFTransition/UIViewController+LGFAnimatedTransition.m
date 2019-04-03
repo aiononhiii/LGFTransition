@@ -13,11 +13,39 @@
 NSString *const lgf_InteractiveTransitionKey = @"lgf_InteractiveTransitionKey";
 NSString *const lgf_IsUseLGFAnimatedTransitionKey = @"lgf_IsUseLGFAnimatedTransitionKey";
 NSString *const lgf_IsShowNaviVCKey = @"lgf_IsShowNaviVCKey";
+NSString *const lgf_OtherShowDelegateKey = @"lgf_OtherShowDelegateKey";
+NSString *const lgf_OtherModalDelegateKey = @"lgf_OtherModalDelegateKey";
 
 @implementation UIViewController (LGFAnimatedTransition)
 @dynamic lgf_InteractiveTransition;
 @dynamic lgf_PanType;
 @dynamic lgf_IsShowNaviVC;
+@dynamic lgf_OtherShowDelegate;
+@dynamic lgf_OtherModalDelegate;
+
+- (id<UINavigationControllerDelegate>)lgf_OtherShowDelegate {
+    return objc_getAssociatedObject(self,
+                                    &lgf_OtherShowDelegateKey);
+}
+
+- (void)setLgf_OtherShowDelegate:(id<UINavigationControllerDelegate>)lgf_OtherShowDelegate {
+    objc_setAssociatedObject(self,
+                             &lgf_OtherShowDelegateKey,
+                             lgf_OtherShowDelegate,
+                             OBJC_ASSOCIATION_ASSIGN);
+}
+
+- (id<UIViewControllerTransitioningDelegate>)lgf_OtherModalDelegate {
+    return objc_getAssociatedObject(self,
+                                    &lgf_OtherModalDelegateKey);
+}
+
+- (void)setLgf_OtherModalDelegate:(id<UIViewControllerTransitioningDelegate>)lgf_OtherModalDelegate {
+    objc_setAssociatedObject(self,
+                             &lgf_OtherModalDelegateKey,
+                             lgf_OtherModalDelegate,
+                             OBJC_ASSOCIATION_ASSIGN);
+}
 
 - (void)setLgf_InteractiveTransition:(UIPercentDrivenInteractiveTransition *)lgf_InteractiveTransition {
     objc_setAssociatedObject(self,
@@ -71,7 +99,11 @@ NSString *const lgf_IsShowNaviVCKey = @"lgf_IsShowNaviVCKey";
     // 确保 modalPresentationStyle 是 UIModalPresentationFullScreen 才使用 LGFModalTransition 自定义动画, 使其不影响系统其他的 Present, 比如 UIAlertViewController
     // Make sure modalPresentationStyle is UIModalPresentationFullScreen to use LGFModalTransition custom animation so that it does not affect other Present of the system, such as UIAlertViewController
     if (viewControllerToPresent.modalPresentationStyle == UIModalPresentationFullScreen && flag) {
-        viewControllerToPresent.transitioningDelegate = [LGFModalTransition sharedLGFModalTransition];
+        if (viewControllerToPresent.lgf_OtherModalDelegate) {
+            viewControllerToPresent.transitioningDelegate = viewControllerToPresent.lgf_OtherModalDelegate;
+        } else {
+            viewControllerToPresent.transitioningDelegate = [LGFModalTransition sharedLGFModalTransition];
+        }
     }
     [self lgf_PresentViewController:viewControllerToPresent animated:flag completion:completion];
 }
@@ -80,7 +112,11 @@ NSString *const lgf_IsShowNaviVCKey = @"lgf_IsShowNaviVCKey";
     // 确保是 UIModalPresentationFullScreen 才使用这个自定义动画，使其不影响系统其他的 Dismiss 比如 UIAlertViewController
     // Make sure modalPresentationStyle is UIModalPresentationFullScreen to use LGFModalTransition custom animation so that it does not affect other Dismiss of the system, such as UIAlertViewController
     if (self.modalPresentationStyle == UIModalPresentationFullScreen && flag) {
-        self.transitioningDelegate = [LGFModalTransition sharedLGFModalTransition];
+        if (self.lgf_OtherModalDelegate) {
+            self.transitioningDelegate = self.lgf_OtherModalDelegate;
+        } else {
+            self.transitioningDelegate = [LGFModalTransition sharedLGFModalTransition];
+        }
     }
     [self lgf_DismissViewControllerAnimated:flag completion:completion];
 }
@@ -101,7 +137,6 @@ NSString *const lgf_IsShowNaviVCKey = @"lgf_IsShowNaviVCKey";
     [self.view addGestureRecognizer:recognizer];
     self.lgf_PanType = panType;
     
-    // 用于解决子控制器横向 scrollview 的手势冲突，将该 scrollview 的 tag 值设为 333333
     [self.view.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([view isKindOfClass:[UICollectionView class]]) {
             if (view.tag == 333333) {
@@ -116,7 +151,6 @@ NSString *const lgf_IsShowNaviVCKey = @"lgf_IsShowNaviVCKey";
 }
 
 - (void)requireG:(UIViewController *)vc block:(void(^)(UIPanGestureRecognizer *pan))block {
-    // 用于解决子控制器横向 scrollview 的手势冲突，将该 scrollview 的 tag 值设为 333333
     [vc.childViewControllers enumerateObjectsUsingBlock:^(__kindof UIViewController * _Nonnull cvc, NSUInteger idx, BOOL * _Nonnull stop) {
         [cvc.view.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
             if ([view isKindOfClass:[UICollectionView class]]) {

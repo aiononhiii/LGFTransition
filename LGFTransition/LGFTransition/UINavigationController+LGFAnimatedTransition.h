@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LGFTransition.h"
+#import "UIViewController+LGFAnimatedTransition.h"
 
 @interface UINavigationController (LGFAnimatedTransition)
 #pragma mark - 是否使用自定义的转场动画 / Whether to use a custom transition animation

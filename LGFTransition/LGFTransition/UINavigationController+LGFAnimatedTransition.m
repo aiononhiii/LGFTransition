@@ -7,7 +7,6 @@
 //
 
 #import "UINavigationController+LGFAnimatedTransition.h"
-#import "UIViewController+LGFAnimatedTransition.h"
 #import "LGFShowTransition.h"
 #import <objc/runtime.h>
 
@@ -42,9 +41,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)lgf_PushViewController:(UIViewController *)viewController animated:(BOOL)animated {
     if (animated) {
-        // 使用自己定义的跳转动画请将 tag 设为8888
-        // Set the tag to 8888 for your custom transition animation
-        if (viewController.view.tag == !8888) {
+        // 使用自己定义的跳转动画请将 VC 的  lgf_OtherDelegate 赋值
+        // Set the lgf_OtherDelegate for your custom transition animation
+        if (viewController.lgf_OtherShowDelegate) {
+            self.delegate = viewController.lgf_OtherShowDelegate;
+        } else {
             self.delegate = [LGFShowTransition sharedLGFShowTransition];
         }
     }
@@ -53,9 +54,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable UIViewController *)lgf_PopViewControllerAnimated:(BOOL)animated {
     if (animated) {
-        // 使用自己定义的跳转动画请将 tag 设为8888
-        // Set the tag to 8888 for your custom transition animation
-        if (self.topViewController.view.tag == !8888) {
+        // 使用自己定义的跳转动画请将 VC 的 lgf_OtherDelegate 赋值
+        // Set the lgf_OtherDelegate for your custom transition animation
+        if (self.visibleViewController.lgf_OtherShowDelegate) {
+            self.delegate = self.visibleViewController.lgf_OtherShowDelegate;
+        } else {
             self.delegate = [LGFShowTransition sharedLGFShowTransition];
         }
     }
