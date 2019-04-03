@@ -35,8 +35,8 @@
 * modalDuration Modal动画想要执行的时间，默认 0.5 秒
 
 # 添加了一个自定义 NavigationBar 和 一个自定义TabBar 具体使用方法参考 Demo
-*其中自定义TabBar 由于一些特殊需求需要出现子控制器的毛玻璃效果（类似淘宝的tabbar），因此子控制器我做了全屏处理，所以子控制器上 scrollview 需要底部预留 49 的 bottom
-*最好在我的自定义 NavigationBar 上再封装一小层，在封装时为它添加 tag 值，用于部分全屏菊花加载页面忽视 NavigationBar，这样即便是数据加载不出来也可以做一些返回等基本操作，这样能让添加的代码更简洁易用（参考 Demo）
+* 其中自定义TabBar 由于一些特殊需求需要出现子控制器的毛玻璃效果（类似淘宝的tabbar），因此子控制器我做了全屏处理，所以子控制器上 scrollview 需要底部预留 49 的 bottom
+* 最好在我的自定义 NavigationBar 上再封装一小层，在封装时为它添加 tag 值，用于部分全屏菊花加载页面忽视 NavigationBar，这样即便是数据加载不出来也可以做一些返回等基本操作，这样能让添加的代码更简洁易用（参考 Demo）
 
 # Show 效果展示
 ![Show 效果展示](https://upload-images.jianshu.io/upload_images/2857609-302c44ba835cc67b.gif?imageMogr2/auto-orient/strip)
