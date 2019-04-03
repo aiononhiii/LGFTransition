@@ -38,6 +38,12 @@
 * 其中自定义TabBar 由于一些特殊需求需要出现子控制器的毛玻璃效果（类似淘宝的tabbar），同时要修改毛玻璃效果可以尝试修改 lgf_VisualView 这个 view 的背景色透明度，因此子控制器我做了全屏处理，所以子控制器上 scrollview 需要底部预留 49 的 bottom
 * 最好在我的自定义 NavigationBar 上再封装一小层，在封装时为它添加 tag 值，用于部分全屏菊花加载页面忽视 NavigationBar，这样即便是数据加载不出来也可以做一些返回等基本操作，这样能让添加的代码更简洁易用（参考 Demo）
 
+# 全局搜索 Demo 里有一个 333333
+* 如果内嵌子控制器上有 scrollview 且为横向滚动 那么请赋值 tag 为 333333，以解决边缘返回手势与 scrollview Pan 手势冲突的问题
+
+# 如果想要使用本 Demo 外的自定义跳转
+* 请在 VC 初始化的时候给VC的 lgf_OtherDelegate 赋值（你自己定义的跳转代理）
+
 # Show 效果展示
 ![Show 效果展示](https://upload-images.jianshu.io/upload_images/2857609-302c44ba835cc67b.gif?imageMogr2/auto-orient/strip)
 # Modal 效果展示
