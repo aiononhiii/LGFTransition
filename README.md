@@ -42,7 +42,7 @@
 * 如果内嵌子控制器上有 scrollview 且为横向滚动 那么请赋值 tag 为 333333，以解决边缘返回手势与 scrollview Pan 手势冲突的问题
 
 # 如果想要使用本 Demo 外的自定义跳转
-* 请在 VC 初始化的时候给VC的 lgf_OtherDelegate 赋值（你自己定义的跳转代理）
+* 请在 VC 初始化的时候给VC的 lgf_OtherShowDelegate/lgf_OtherModalDelegate 赋值（你自己定义的跳转代理）
 
 # Show 效果展示
 ![Show 效果展示](https://upload-images.jianshu.io/upload_images/2857609-302c44ba835cc67b.gif?imageMogr2/auto-orient/strip)
