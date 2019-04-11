@@ -28,6 +28,9 @@ lgf_SBViewControllerForM(LGFTabBarVC, @"LGFTabBarVC", @"LGFTransition");
     self.lgf_TabBarBackView.layer.shadowColor = [UIColor blackColor].CGColor;
     self.lgf_TabBarBackView.layer.shadowRadius = 4.0;
     self.lgf_TabBarBackView.layer.shadowOpacity = 0.03;
+    if (self.lgf_VisualColor) {
+        self.lgf_VisualView.backgroundColor = self.lgf_VisualColor;
+    }
 }
 
 - (void)lgf_TabBarVCShowInView:(UIViewController *)vc {

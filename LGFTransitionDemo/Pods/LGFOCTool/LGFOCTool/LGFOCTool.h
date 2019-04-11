@@ -23,7 +23,7 @@
 
 // SDWebImage
 #import "UIImageView+WebCache.h"
- 
+
 //****************************** 自定义控件 *******************************
 // 倒计时按钮 用于发送验证码
 #import "LGFCountDownButton.h"
@@ -40,7 +40,13 @@
 #import "LGFImageAlertView.h"
 // 自定义菜单
 #import "LGFPopMenu.h"
-
+// 自定义 cell
+#import "LGFImageTitleCell.h"
+#import "LGFImageCell.h"
+// 点击果冻按钮
+#import "LGFClickJumpButton.h"
+// 网页顶部加载条
+#import "LGFWebProgress.h"
 // LGFRefresh 封装
 #import "UIScrollView+LGFRefresh.h"
 //******************************** 分类 **********************************

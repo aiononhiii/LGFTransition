@@ -35,7 +35,7 @@
 
 @implementation LGFNavigationBar
 
-lgf_XibViewForM(LGFNavigationBar, @"LGFNavigationBar");
+lgf_XibViewForM(LGFNavigationBar, @"LGFTransition");
 
 - (void)lgf_ShowLGFNavigationBar:(UIView *)SV {
     [self lgf_ShowLGFNavigationBar:SV style:[LGFNavigationBarStyle lgf]];
