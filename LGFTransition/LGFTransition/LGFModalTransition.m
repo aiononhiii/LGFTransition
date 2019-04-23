@@ -82,7 +82,9 @@ lgf_AllocOnlyOnceForM(LGFModalTransition, LGFModalTransition);
             self.toVC = toVC;
             // 给 self.toVC 添加手势
             // Add gestures to toVC
-            [self.toVC lgf_AddPopPan:lgf_DismissPan];
+            if (self.isPresent) {
+                [self.toVC lgf_AddPopPan:lgf_PopPan];
+            }
         } else {
             toView.transform = CGAffineTransformIdentity;
             [toView removeFromSuperview];

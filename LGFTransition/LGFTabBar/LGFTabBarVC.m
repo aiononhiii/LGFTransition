@@ -34,14 +34,14 @@ lgf_SBViewControllerForM(LGFTabBarVC, @"LGFTabBarVC", @"LGFTransition");
 }
 
 - (void)lgf_TabBarVCShowInView:(UIViewController *)vc {
-    [self.lgf_BarChildVCs enumerateObjectsUsingBlock:^(UIViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [self addChildViewController:obj];
-        [obj didMoveToParentViewController:self];
-    }];
     [vc addChildViewController:self];
     self.view.frame = lgf_MainScreen;
     [vc.view addSubview:self.view];
     [self didMoveToParentViewController:vc];
+    [self.lgf_BarChildVCs enumerateObjectsUsingBlock:^(UIViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [self addChildViewController:obj];
+        [obj didMoveToParentViewController:self];
+    }];
 }
 
 - (void)setLgf_DefultSelectIndex:(NSInteger)lgf_DefultSelectIndex {
