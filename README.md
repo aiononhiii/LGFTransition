@@ -1,11 +1,3 @@
-##Show效果展示
-
-![](https://upload-images.jianshu.io/upload_images/2857609-27c8f312e5d524e4.gif?imageMogr2/auto-orient/strip)
-
-##Modal 效果展示
-
-![](https://upload-images.jianshu.io/upload_images/2857609-0cb5bbc5ba881943.gif?imageMogr2/auto-orient/strip)
-
 ##制作目的
 * 想要自定义系统转场动画速度
 * 放弃不顺畅的 NavigationBar 隐藏消失
@@ -43,4 +35,13 @@
 
 ##Demo 里还添加了一个可以让普通按钮变成pop返回按钮的 UIButton 父类
 * 自定义 NavigationBar 上的 UIButton 直接继承 LGFNavigationBackButton 就可以有pop返回的功能了
+
+##Show效果展示
+
+![](https://upload-images.jianshu.io/upload_images/2857609-27c8f312e5d524e4.gif?imageMogr2/auto-orient/strip)
+
+##Modal 效果展示
+
+![](https://upload-images.jianshu.io/upload_images/2857609-0cb5bbc5ba881943.gif?imageMogr2/auto-orient/strip)
+
 
