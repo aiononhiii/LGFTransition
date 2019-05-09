@@ -58,16 +58,13 @@ lgf_AllocOnlyOnceForM(LGFShowTransition, LGFShowTransition);
         [toView addSubview:mask];
         [containerView bringSubviewToFront:fromView];
         toView.transform = CGAffineTransformMakeTranslation(-(lgf_ScreenWidth * 0.3), 0);
-        toView.transform = CGAffineTransformScale(toView.transform, 0.95, 0.95);
     }
-    
     // 执行自定义转场动画 改变UI
     // Perform custom transition animations Change UI
     [UIView animateWithDuration:[self transitionDuration:transitionContext] delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         if (self.isPush) {
             mask.alpha = 0.6;
             fromView.transform = CGAffineTransformMakeTranslation(-(lgf_ScreenWidth * 0.3), 0);
-            fromView.transform = CGAffineTransformScale(fromView.transform, 0.95, 0.95);
             toView.transform = CGAffineTransformIdentity;
         } else {
             mask.alpha = 0.0;

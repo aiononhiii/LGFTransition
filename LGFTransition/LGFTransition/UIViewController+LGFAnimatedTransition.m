@@ -7,6 +7,7 @@
 //
 
 #import "UIViewController+LGFAnimatedTransition.h"
+#import "UINavigationController+LGFAnimatedTransition.h"
 #import "LGFModalTransition.h"
 #import <objc/runtime.h>
 
@@ -79,6 +80,20 @@ NSString *const lgf_OtherModalDelegateKey = @"lgf_OtherModalDelegateKey";
     return [objc_getAssociatedObject(self, &lgf_IsShowNaviVCKey) boolValue];
 }
 
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        Class class = [self class];
+        // 如果使用自定义转场动画，那么隐藏所有navigationBar，全部使用自定义，手动添加的返回按钮直接继承我的 LGFBackButton 就可以自动 pop 了
+        // If you use a custom transition animation, then hide all navigationBar, all use the custom, manually add the return button directly inherited my LGFBackButton can automatically pop up
+        method_exchangeImplementations(class_getInstanceMethod(class, @selector(viewWillAppear:)), class_getInstanceMethod(class, @selector(lgf_AnimatedTransitionViewWillAppear:)));
+        // 在模态跳转中也同样使用自定义动画时长
+        // Same custom animation duration in modal
+        method_exchangeImplementations(class_getInstanceMethod(class, @selector(presentViewController:animated:completion:)), class_getInstanceMethod(class, @selector(lgf_PresentViewController:animated:completion:)));
+        method_exchangeImplementations(class_getInstanceMethod(class, @selector(dismissViewControllerAnimated:completion:)), class_getInstanceMethod(class, @selector(lgf_DismissViewControllerAnimated:completion:)));
+    });
+}
+
 + (void)lgf_AnimatedTransitionModalDuration:(NSTimeInterval)modalDuration {
     if (modalDuration <= 0) {
         // 默认 0.6 / defult 0.6
@@ -86,36 +101,33 @@ NSString *const lgf_OtherModalDelegateKey = @"lgf_OtherModalDelegateKey";
     } else {
         [LGFModalTransition sharedLGFModalTransition].lgf_TransitionDuration = modalDuration;
     }
-    // 如果使用自定义转场动画，那么隐藏所有navigationBar，全部使用自定义，手动添加的返回按钮直接继承我的 LGFBackButton 就可以自动 pop 了
-    // If you use a custom transition animation, then hide all navigationBar, all use the custom, manually add the return button directly inherited my LGFBackButton can automatically pop up
-    method_exchangeImplementations(class_getInstanceMethod([self class], @selector(viewWillAppear:)), class_getInstanceMethod([self class], @selector(lgf_AnimatedTransitionViewWillAppear:)));
-    // 在模态跳转中也同样使用自定义动画时长
-    // Same custom animation duration in modal
-    method_exchangeImplementations(class_getInstanceMethod([self class], @selector(presentViewController:animated:completion:)), class_getInstanceMethod([self class], @selector(lgf_PresentViewController:animated:completion:)));
-    method_exchangeImplementations(class_getInstanceMethod([self class], @selector(dismissViewControllerAnimated:completion:)), class_getInstanceMethod([self class], @selector(lgf_DismissViewControllerAnimated:completion:)));
 }
 
 - (void)lgf_PresentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^)(void))completion {
-    // 确保 modalPresentationStyle 是 UIModalPresentationFullScreen 才使用 LGFModalTransition 自定义动画, 使其不影响系统其他的 Present, 比如 UIAlertViewController
-    // Make sure modalPresentationStyle is UIModalPresentationFullScreen to use LGFModalTransition custom animation so that it does not affect other Present of the system, such as UIAlertViewController
-    if (viewControllerToPresent.modalPresentationStyle == UIModalPresentationFullScreen && flag) {
-        if (viewControllerToPresent.lgf_OtherModalDelegate) {
-            viewControllerToPresent.transitioningDelegate = viewControllerToPresent.lgf_OtherModalDelegate;
-        } else {
-            viewControllerToPresent.transitioningDelegate = [LGFModalTransition sharedLGFModalTransition];
+    if (flag && [LGFModalTransition sharedLGFModalTransition].lgf_TransitionDuration > 0.0) {
+        // 确保 modalPresentationStyle 是 UIModalPresentationFullScreen 才使用 LGFModalTransition 自定义动画, 使其不影响系统其他的 Present, 比如 UIAlertViewController
+        // Make sure modalPresentationStyle is UIModalPresentationFullScreen to use LGFModalTransition custom animation so that it does not affect other Present of the system, such as UIAlertViewController
+        if (viewControllerToPresent.modalPresentationStyle == UIModalPresentationFullScreen) {
+            if (viewControllerToPresent.lgf_OtherModalDelegate) {
+                viewControllerToPresent.transitioningDelegate = viewControllerToPresent.lgf_OtherModalDelegate;
+            } else {
+                viewControllerToPresent.transitioningDelegate = [LGFModalTransition sharedLGFModalTransition];
+            }
         }
     }
     [self lgf_PresentViewController:viewControllerToPresent animated:flag completion:completion];
 }
 
 - (void)lgf_DismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion {
-    // 确保是 UIModalPresentationFullScreen 才使用这个自定义动画，使其不影响系统其他的 Dismiss 比如 UIAlertViewController
-    // Make sure modalPresentationStyle is UIModalPresentationFullScreen to use LGFModalTransition custom animation so that it does not affect other Dismiss of the system, such as UIAlertViewController
-    if (self.modalPresentationStyle == UIModalPresentationFullScreen && flag) {
-        if (self.lgf_OtherModalDelegate) {
-            self.transitioningDelegate = self.lgf_OtherModalDelegate;
-        } else {
-            self.transitioningDelegate = [LGFModalTransition sharedLGFModalTransition];
+    if (flag && [LGFModalTransition sharedLGFModalTransition].lgf_TransitionDuration > 0.0) {
+        // 确保是 UIModalPresentationFullScreen 才使用这个自定义动画，使其不影响系统其他的 Dismiss 比如 UIAlertViewController
+        // Make sure modalPresentationStyle is UIModalPresentationFullScreen to use LGFModalTransition custom animation so that it does not affect other Dismiss of the system, such as UIAlertViewController
+        if (self.modalPresentationStyle == UIModalPresentationFullScreen) {
+            if (self.lgf_OtherModalDelegate) {
+                self.transitioningDelegate = self.lgf_OtherModalDelegate;
+            } else {
+                self.transitioningDelegate = [LGFModalTransition sharedLGFModalTransition];
+            }
         }
     }
     [self lgf_DismissViewControllerAnimated:flag completion:completion];
